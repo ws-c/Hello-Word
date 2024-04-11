@@ -1,12 +1,14 @@
-import axios from 'axios'
+import HTTP from '@/utils/axios'
 import { NextResponse } from 'next/server'
 import { type NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
-  const url = searchParams.get('url') as string
+  const type = searchParams.get('type') as string
+  const audio = searchParams.get('audio') as string
+  const url = `/dictvoice?type=${type}&audio=${audio}`
   try {
-    const response = await axios({
+    const response = await HTTP({
       method: 'GET',
       url,
       responseType: 'stream',

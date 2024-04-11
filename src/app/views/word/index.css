@@ -3,8 +3,9 @@
   justify-content: center;
   align-items: center;
   width: 95%;
-  height: 800px;
+  height: 680px;
   background-color: #fff;
+  box-shadow:8px 8px 8px rgba(0, 0, 0, 0.1);
 }
 .word-container {
   display: flex;

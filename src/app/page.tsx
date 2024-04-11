@@ -1,14 +1,10 @@
 'use client'
 import '@/app/globals.css'
-import { useEffect, useState } from 'react'
 import { Layout } from 'antd'
 import Word from './views/word/page'
-
 const { Header, Content, Footer } = Layout
 
 export default function Home() {
-  // document.documentElement.style.fontSize =
-  //   document.documentElement.clientWidth / 375 + 'px'
   return (
     <Layout>
       <Header
@@ -29,7 +25,8 @@ export default function Home() {
       </Header>
       <Content
         style={{
-          paddingTop: '100px',
+          paddingTop: '120px',
+          paddingBottom: '40px',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -37,7 +34,16 @@ export default function Home() {
       >
         <Word></Word>
       </Content>
-      <Footer style={{ position:'fixed',bottom: 0,width:'100vw',textAlign: 'center',height: '10%'}}>
+      <Footer
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          width: '100vw',
+          textAlign: 'center',
+          height: '80px',
+          padding: '40px',
+        }}
+      >
         Ant Design ©{new Date().getFullYear()} Created by Ant UED
       </Footer>
     </Layout>
