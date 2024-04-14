@@ -62,6 +62,14 @@
   background-color: #209E85;
   color: white;
 }
+.know-active {
+  background-color: #209E85;
+  color: white;
+}
+.forget-active {
+  background-color: #9e2020;
+  color: white;
+}
 .body span:last-child:hover {
   background-color: #9e2020;
   color: white;
@@ -72,11 +80,14 @@
   align-items: center;
   gap: 80px;
 }
-.icon{
+.audio{
   max-width: 35px; 
   max-height: 35px; 
   filter: grayscale(100%);
 }
-.icon:hover{
+.audio:hover{
+  filter: grayscale(0%);
+}
+.audio-active{
   filter: grayscale(0%);
 }

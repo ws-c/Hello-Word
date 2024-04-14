@@ -24,7 +24,7 @@ export default function useKeydown({ onPlay, word, setWordState }: tsProp) {
         // 在按下 右方向键 时触发
         setWordState(false, word?.cet4_word!)
       }
-    }),500)
+    }),300)
     // 添加键盘事件监听器
     window.addEventListener('keydown', handleKeyDown)
     // 在组件卸载时移除事件监听器
