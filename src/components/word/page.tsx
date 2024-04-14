@@ -10,8 +10,11 @@ import { useCallback, useEffect, useState } from 'react'
 import { getLocalIndex, setLocalIndex } from '@/utils/localStorage'
 import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
+import type { word } from '@/types/word'
+import Prompt from '../prompt/page'
 
 export default function Word() {
+  const router = useRouter()
   // 动态class
   const [isUSActive, setIsUSActive] = useState(false)
   const [isUKActive, setIsUKActive] = useState(false)
@@ -20,12 +23,16 @@ export default function Word() {
 
   // 获取单词
   const [index, setIndex] = useState(getLocalIndex())
-  const { word, fetchData } = useGetData()
+  const [word, setWord] = useState<word>()
+  const { fetchData } = useGetData()
   useEffect(() => {
-    if (localStorage.getItem('index') === null) {
-      setIndex(1)
+    const getWord = async () => {
+      if (localStorage.getItem('index') === null) {
+        setIndex(1)
+      }
+      setWord(await fetchData(index!))
     }
-    fetchData(index!)
+    getWord()
   }, [fetchData, index])
 
   // 获取音频
@@ -53,11 +60,11 @@ export default function Word() {
           setIsKnowActive(true)
         } else {
           setIsForgetActive(true)
+          router.push('/detail')
         }
         // 设置本地存储索引
         setIndex(index! + 1)
         setLocalIndex(index! + 1)
-        // router.push('/word')
       },
       300 // 设置延迟时间，以毫秒为单位
     ),
@@ -120,6 +127,7 @@ export default function Word() {
           </span>
         </div>
       </div>
+      <Prompt></Prompt>
     </div>
   )
 }

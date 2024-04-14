@@ -10,6 +10,7 @@ export default function Home() {
       <Header
         style={{
           position: 'fixed',
+          zIndex: 999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -40,7 +41,7 @@ export default function Home() {
           bottom: 0,
           width: '100vw',
           textAlign: 'center',
-          height: '80px',
+          height: '40px',
           padding: '40px',
         }}
       >

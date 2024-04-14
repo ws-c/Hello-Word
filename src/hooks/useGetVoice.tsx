@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useGetVoice() {
   const [, setAudioUrl] = useState('')
@@ -12,6 +12,8 @@ export default function useGetVoice() {
         // 创建一个新的音频对象
         const wordAudio = new Audio(audioUrl)
         // 播放音频
+        // wordAudio.autoplay = true
+        // wordAudio.muted = true
         wordAudio.play()
       } else {
         console.error('Error fetching data:', res.statusText)
@@ -21,5 +23,5 @@ export default function useGetVoice() {
     }
   }
 
-  return {getVoice }
+  return { getVoice }
 }
