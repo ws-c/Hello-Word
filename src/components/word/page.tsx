@@ -2,13 +2,14 @@
 'use client'
 import Image from 'next/image'
 import './index.css'
-import icon from '../../../assets/trumpet.png'
-import useGetData from './hooks/useGetData'
-import useGetVoice from './hooks/useGetVoice'
-import useKeydown from './hooks/useKeydown'
+import icon from '@/assets/trumpet.png'
+import useGetData from '../../hooks/useGetData'
+import useGetVoice from '../../hooks/useGetVoice'
+import useKeydown from '../../hooks/useKeydown'
 import { useCallback, useEffect, useState } from 'react'
 import { getLocalIndex, setLocalIndex } from '@/utils/localStorage'
-import debounce from '../../../utils/debounce'
+import debounce from '../../utils/debounce'
+import { useRouter } from 'next/navigation'
 
 export default function Word() {
   // 动态class
@@ -48,14 +49,15 @@ export default function Word() {
   const setWordState = useCallback(
     debounce(
       (flag: boolean, text: string) => {
-        // 设置本地存储索引
-        setIndex(index! + 1)
-        setLocalIndex(index! + 1)
         if (flag) {
           setIsKnowActive(true)
         } else {
           setIsForgetActive(true)
         }
+        // 设置本地存储索引
+        setIndex(index! + 1)
+        setLocalIndex(index! + 1)
+        // router.push('/word')
       },
       300 // 设置延迟时间，以毫秒为单位
     ),
@@ -67,15 +69,12 @@ export default function Word() {
     const timeoutId = setTimeout(() => {
       setIsKnowActive(false)
       setIsForgetActive(false)
-    }, 300)
-    const timeoutId2 = setTimeout(() => {
       setIsUKActive(false)
       setIsUSActive(false)
-    }, 500)
+    }, 300)
 
     return () => {
       clearTimeout(timeoutId)
-      clearTimeout(timeoutId2)
     }
   }, [setIsKnowActive, setIsForgetActive, setWordState, onPlay])
 

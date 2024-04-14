@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import debounce from '../../../../utils/debounce'
+import debounce from '../utils/debounce'
 type tsProp = {
   onPlay: (type: string, word: string) => void
   word: { cet4_word: string } | undefined

@@ -1,7 +1,7 @@
 'use client'
 import '@/app/globals.css'
 import { Layout } from 'antd'
-import Word from './views/word/page'
+import Word from '../components/word/page'
 const { Header, Content, Footer } = Layout
 
 export default function Home() {
