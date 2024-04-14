@@ -1,0 +1,56 @@
+.detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #af5252;
+  width: 90%;
+  height: 700px;
+  margin: 0 auto;
+  color: white;
+}
+.detail-head {
+  background-color: rgb(201, 107, 107);
+  width: 50vw;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+.detail-head .word {
+  font-size: 72px;
+  color: black;
+}
+.detail-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 50px;
+}
+.detail-body .translate {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 16px;
+  color: black;
+}
+.detail-body .soundmark {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  color: black;
+}
+.detail-body .samples {
+  background-color: #393939;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  font-size: 25px;
+}
