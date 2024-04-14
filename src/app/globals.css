@@ -22,4 +22,13 @@
   color: rgb(199, 199, 199);
   font-size: 25px;
 }
-
+.main-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 750px;
+  background-color: #fff;
+  box-shadow:8px 8px 8px rgba(0, 0, 0, 0.1);
+}

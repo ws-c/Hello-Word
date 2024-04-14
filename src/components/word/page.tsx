@@ -58,13 +58,13 @@ export default function Word() {
       (flag: boolean, text: string) => {
         if (flag) {
           setIsKnowActive(true)
+          // 设置本地存储索引
+          setIndex(index! + 1)
+          setLocalIndex(index! + 1)
         } else {
           setIsForgetActive(true)
-          router.push('/detail')
+          router.push(`/detail/${index}`)
         }
-        // 设置本地存储索引
-        setIndex(index! + 1)
-        setLocalIndex(index! + 1)
       },
       300 // 设置延迟时间，以毫秒为单位
     ),
@@ -88,7 +88,7 @@ export default function Word() {
   // 键盘事件
   useKeydown({ onPlay, word, setWordState })
   return (
-    <div className="page-container">
+    <>
       <div className="word-container">
         <div className="head">
           <span>{word?.cet4_word}</span>
@@ -128,6 +128,6 @@ export default function Word() {
         </div>
       </div>
       <Prompt></Prompt>
-    </div>
+    </>
   )
 }
