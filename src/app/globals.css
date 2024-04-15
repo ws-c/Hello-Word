@@ -13,12 +13,14 @@
   --text-color: #000;
   --background-color1: #fff;
   --background-color2: #f5f5f5;
+  --colorBgElevated: #ffffff;
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
-  --text-color: #FFFFFF;
+  --text-color: #ffffff;
   --background-color1: #121212;
   --background-color2: #000000;
+  --colorBgElevated: #f5deb300;
 }
 body {
   background-color: var(--background-color2);

@@ -12,8 +12,10 @@ const content = (
 
 const Prompt: React.FC = () => (
   <div className="prompt">
-    <Popover content={content} placement="bottom">
-      <Button type="dashed" className='prompt-btn'>快捷键</Button>
+    <Popover className=".prompt-popover" content={content} placement="bottom">
+      <Button type="dashed" className="prompt-btn">
+        快捷键
+      </Button>
     </Popover>
   </div>
 )

@@ -10,3 +10,14 @@ export const getLocalIndex = () => {
   return parseInt(localStorage.getItem('index') || '1')
   }
 }
+export const setLocalTheme = (theme: string) => {
+  if (typeof window !== 'undefined'){
+  localStorage.setItem('theme', theme)
+  }
+}
+
+export const getLocalTheme = () => {
+  if (typeof window !== 'undefined'){
+  return localStorage.getItem('theme') || 'light'
+  }
+}

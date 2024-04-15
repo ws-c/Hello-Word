@@ -1,8 +1,9 @@
-.prompt{
+.prompt {
   position: absolute;
   right: 4%;
   top: 4%;
 }
-.prompt-btn{
-  color:rgb(176, 176, 160) !important;
+.prompt-btn {
+  color: rgb(176, 176, 160) !important;
+  background-color: var(--colorBgElevated) !important;
 }

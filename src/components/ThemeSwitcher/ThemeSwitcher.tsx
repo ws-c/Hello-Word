@@ -1,21 +1,38 @@
 'use client'
-import { useState } from 'react'
-import { Switch } from 'antd'
+import { useEffect, useState } from 'react'
+import './index.css'
+import { getLocalTheme, setLocalTheme } from '@/utils/localStorage'
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<string>('light')
+  const [theme, setTheme] = useState<string>(getLocalTheme()!)
+  const [isChecked, setIsChecked] = useState(false)
 
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark')
-      document.documentElement.dataset.theme = theme
-    } else {
-      setTheme('light')
-      document.documentElement.dataset.theme = theme
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    document.documentElement.dataset.theme = newTheme
+    setLocalTheme(newTheme)
+  }
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    if(theme === 'dark'){
+      setIsChecked(true)
+    }else{
+      setIsChecked(false)
     }
-  }
-  const onChange = (checked: boolean) => {
-    toggleTheme()
-    console.log(`switch to ${checked}`)
-  }
-  return <Switch defaultChecked onChange={onChange} />
+  }, [theme])
+
+  return (
+    <>
+      <label className="switch">
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={toggleTheme}
+        />{' '}
+        {/* Move onChange handler here */}
+        <span className="slider round"></span>
+      </label>
+    </>
+  )
 }
