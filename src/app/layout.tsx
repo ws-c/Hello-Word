@@ -38,6 +38,7 @@ export default function RootLayout({
           </header>
           <main
             style={{
+              width: '100vw',
               paddingTop: '120px',
               paddingBottom: '40px',
               display: 'flex',
