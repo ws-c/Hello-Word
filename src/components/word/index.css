@@ -1,4 +1,3 @@
-
 .word-container {
   display: flex;
   justify-content: center;
@@ -16,73 +15,79 @@
   font-family: 'Courier New', Courier, monospace;
   font-size: 80px;
 }
-.head p{
+.head p {
   font-size: 20px;
 }
-.body{
+.know-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-top: 100px;
 }
-.sentence {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  padding-bottom: 30px;
-  width: 500px;
-  font-size: 25px;
-}
-.sentence p:first-child{
-  font-weight: 600;
-  font-size: 30px;
-}
-.body span {
+.know-body span {
   font-size: 20px;
-  border: 1px solid #DDDDDD;
+  border: 2px solid transparent; /* 初始时无边框 */
+  border-radius: 5px; /* 圆角 */
   padding: 20px;
-  width: 500px;
+  width: 500px; /* 缩小宽度以适应内容 */
+  display: inline-block; /* 让元素水平排列 */
+  cursor: pointer; /* 鼠标悬停时显示指针样式 */
+  text-align: center; /* 文本居中 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
 }
-.body span:last-child{
+
+.know-active, .forget-active {
+  background-color: #001529; /* 活跃状态的背景颜色 */
+  color: #ffffff; /* 活跃状态的文本颜色 */
+  border-color: #001529; /* 活跃状态的边框颜色 */
+}
+.know-body span:last-child {
   border-top: none;
 }
-.body span:hover {
-  background-color: #209E85;
+.know-body span:hover {
+  background-color: #209e85;
   color: white;
 }
 .know-active {
-  background-color: #209E85;
+  background-color: #209e85;
   color: white;
 }
 .forget-active {
   background-color: #9e2020;
   color: white;
 }
-.body span:last-child:hover {
+.know-body span:last-child:hover {
   background-color: #9e2020;
   color: white;
 }
-.icon-container{
+.icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 80px;
+  gap: 100px;
 }
-.audio{
-  max-width: 35px; 
-  max-height: 35px; 
+.audio {
+  max-width: 35px;
+  max-height: 35px;
   filter: grayscale(100%);
 }
-.audio:hover{
+.audio:hover {
   filter: grayscale(0%);
 }
-.audio-active{
+.audio-active {
   filter: grayscale(0%);
 }
-.word-statistic{
+.word-statistic {
   position: absolute;
   top: 8px;
   left: 40px;
+}
+.ant-statistic-title {
+  color:var(--text-color) !important;
+}
+.ant-statistic-content-value-int {
+  color: var(--ant-statistic-content-value);
+}
+.ant-statistic-content-suffix {
+  color: var(--text-color);
 }

@@ -10,12 +10,14 @@
 }
 :root {
   --primary-color: #f5deb3;
-  --text-color: #000;
+  --text-color: rgba(0, 0, 0, 0.8);
   --background-color1: #fff;
   --background-color2: #f5f5f5;
   --colorBgElevated: #ffffff;
   --contentBg: #f5f5f5;
   --contentBgShadow: rgba(0, 0, 0, 0.1);
+  --headerShadow: rgba(38, 93, 221, 0.6);
+  --ant-statistic-content-value: rgb(30, 227, 79);
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
@@ -25,22 +27,37 @@ html[data-theme='dark'] {
   --colorBgElevated: #f5deb300;
   --contentBg: rgba(69, 62, 62, 0.348);
   --contentBgShadow: rgba(255, 255, 255, 0.1);
+  --headerShadow: rgba(16, 0, 240, 0.6);
+  --ant-statistic-content-value: #16ffe8;
 }
 html {
   width: 100vw;
+}
+.header {
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 80px;
+  background-color: #001529;
+  padding: 0 80px;
+  box-shadow: 0 10px 400px var(--headerShadow);
 }
 body {
   background-color: var(--background-color2);
   color: var(--text-color);
 }
 .logo {
+  letter-spacing: 1px;
   font-size: 30px;
   font-weight: bold;
   color: var(--primary-color);
 }
-.logo::before{
+.logo::before {
   content: '\01F426';
-  font-size: 30px;
+  font-size: 40px;
 }
 .tool-bar {
   position: absolute;
@@ -55,7 +72,7 @@ body {
   font-size: 32px;
 }
 .Header-Font:hover {
-  color: var(--primary-color);
+  color: var(--primary-color); /* 文本悬停时的颜色 */
 }
 .main-container {
   position: relative;

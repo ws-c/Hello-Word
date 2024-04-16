@@ -12,7 +12,7 @@ import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
 import Prompt from '../prompt/page'
-import { Statistic } from 'antd'
+import { Divider, Statistic } from 'antd'
 
 export default function Word() {
   const [count, setCount] = useState(0)
@@ -115,13 +115,14 @@ export default function Word() {
             ></Image>
           </div>
         </div>
-        <div className="body">
+        <div className="know-body">
           <span
             className={isKnowActive ? 'know-active' : ''}
             onClick={() => setWordState(true)}
           >
             认识
           </span>
+          <Divider dashed={true}></Divider>
           <span
             className={isForgetActive ? 'forget-active' : ''}
             onClick={() => setWordState(false)}

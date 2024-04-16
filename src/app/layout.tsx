@@ -4,7 +4,7 @@ import { AntdRegistry } from '@ant-design/nextjs-registry'
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
 export const metadata: Metadata = {
-  title: 'Hello word',
+  title: 'Hello Word',
   description: 'Created by WGenji',
 }
 
@@ -18,17 +18,7 @@ export default function RootLayout({
       <body>
         <AntdRegistry>
           <header
-            style={{
-              position: 'fixed',
-              zIndex: 999,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100vw',
-              height: '80px',
-              backgroundColor: '#001529',
-              padding: '0 80px',
-            }}
+            className='header'
           >
             <div className="logo">
               <span>Hello Word</span>
@@ -41,7 +31,7 @@ export default function RootLayout({
           </header>
           <main
             style={{
-              paddingTop: '120px',
+              paddingTop: '96px',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
