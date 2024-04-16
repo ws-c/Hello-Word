@@ -4,8 +4,14 @@ type tsProp = {
   onPlay: (type: string, word: string) => void
   word: { cet4_word: string } | undefined
   setWordState?: (flag: boolean) => void
+  banKeydown?: string
 }
-export default function useKeydown({ onPlay, word, setWordState }: tsProp) {
+export default function useKeydown({
+  onPlay,
+  word,
+  setWordState,
+  banKeydown,
+}: tsProp) {
   useEffect(() => {
     const handleKeyDown = debounce((event: KeyboardEvent) => {
       if (event.key === 'z') {
@@ -17,7 +23,7 @@ export default function useKeydown({ onPlay, word, setWordState }: tsProp) {
         onPlay('2', word?.cet4_word!)
       }
       if (setWordState) {
-        if (event.key === 'ArrowLeft') {
+        if (event.key === 'ArrowLeft' && banKeydown === 'ArrowLeft') {
           // 在按下 左方向键 时触发
           setWordState(false)
         }
@@ -33,5 +39,5 @@ export default function useKeydown({ onPlay, word, setWordState }: tsProp) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [onPlay, setWordState, word?.cet4_word])
+  }, [banKeydown, onPlay, setWordState, word?.cet4_word])
 }

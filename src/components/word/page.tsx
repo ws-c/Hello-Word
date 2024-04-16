@@ -88,7 +88,7 @@ export default function Word() {
   }, [setIsKnowActive, setIsForgetActive, setWordState, onPlay])
 
   // 键盘事件
-  useKeydown({ onPlay, word, setWordState })
+  useKeydown({ onPlay, word, setWordState, banKeydown: 'ArrowLeft' })
   return (
     <>
       <div className="word-container">

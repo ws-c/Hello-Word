@@ -12,6 +12,7 @@ import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
 import { mergeEveryThree } from '@/utils/stringSplit'
+import Prompt from '@/components/prompt/page'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
   const router = useRouter()
@@ -132,6 +133,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           className="RightOutlined"
         />
       </div>
+      <Prompt></Prompt>
     </>
   )
 }
