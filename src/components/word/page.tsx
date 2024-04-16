@@ -25,15 +25,6 @@ export default function Word() {
   const [index, setIndex] = useState(getLocalIndex())
   const [word, setWord] = useState<word>()
   const { fetchData } = useGetData()
-  useEffect(() => {
-    const getWord = async () => {
-      if (localStorage.getItem('index') === null) {
-        setIndex(1)
-      }
-      setWord(await fetchData(index!))
-    }
-    getWord()
-  }, [fetchData, index])
 
   // 获取音频
   const { getVoice } = useGetVoice()
@@ -51,24 +42,35 @@ export default function Word() {
     ),
     [getVoice]
   )
-
+  // 第一次渲染
+  useEffect(() => {
+    const getWord = async () => {
+      if (localStorage.getItem('index') === null) {
+        setIndex(1)
+      }
+      setWord(await fetchData(index!))
+    }
+    getWord()
+  }, [fetchData, index])
   // 设置认识或不认识
   const setWordState = useCallback(
     debounce(
-      (flag: boolean, text: string) => {
+      (flag: boolean) => {
+        onPlay('1', word?.cet4_word!)
         if (flag) {
+          // router.push(`/detail?id=${index}&type=know`)
+          router.push(`/detail/${index}/know`)
           setIsKnowActive(true)
           // 设置本地存储索引
           setIndex(index! + 1)
           setLocalIndex(index! + 1)
         } else {
           setIsForgetActive(true)
-          router.push(`/detail/${index}`)
         }
       },
       300 // 设置延迟时间，以毫秒为单位
     ),
-    [index]
+    [index, onPlay]
   )
 
   // 触发显示效果
@@ -115,13 +117,13 @@ export default function Word() {
           </div> */}
           <span
             className={isKnowActive ? 'know-active' : ''}
-            onClick={() => setWordState(true, word?.cet4_word!)}
+            onClick={() => setWordState(true)}
           >
             认识
           </span>
           <span
             className={isForgetActive ? 'forget-active' : ''}
-            onClick={() => setWordState(false, word?.cet4_word!)}
+            onClick={() => setWordState(false)}
           >
             不认识
           </span>

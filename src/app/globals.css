@@ -52,7 +52,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 95%;
-  height: 780px;
+  min-height: 780px;
   background-color: var(--background-color1);
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
 }

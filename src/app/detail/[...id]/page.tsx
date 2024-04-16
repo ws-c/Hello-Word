@@ -8,39 +8,21 @@ import useGetVoice from '@/hooks/useGetVoice'
 import debounce from '@/utils/debounce'
 import useGetData from '@/hooks/useGetData'
 import type { word_sample_filter } from '@/types/word'
-export default function Detail({ params }: { params: { id: string } }) {
+import useKeydown from '@/hooks/useKeydown'
+import { useRouter } from 'next/navigation'
+import { setLocalIndex } from '@/utils/localStorage'
+import { mergeEveryThree } from '@/utils/stringSplit'
+
+export default function Detail({ params }: { params: { id: string[] } }) {
+  const router = useRouter()
   const [isUSActive, setIsUSActive] = useState(false)
   const [isUKActive, setIsUKActive] = useState(false)
   // 获取单词
-  const [index, setIndex] = useState(+params.id)
+  const [index, setIndex] = useState(+params.id[0])
   const [word, setWord] = useState<word_sample_filter>()
+  const [nextWord, setNextWord] = useState<word_sample_filter>()
   const { fetchData } = useGetData()
-  useEffect(() => {
-    function mergeEveryThree(arr: any[]) {
-      let mergedArr = []
-      let j = 1
-      for (let i = 0; i < arr.length; i += 3) {
-        let mergedStr = arr.slice(i, i + 3).join('')
-        mergedArr.push(`${j}. ` + mergedStr)
-        j++
-      }
-      return mergedArr
-    }
-    const getWord = async () => {
-      if (localStorage.getItem('index') === null) {
-        setIndex(1)
-      }
-      const data = await fetchData(index)
 
-      const sampleList = data.cet4_samples.split('\n')
-      data.cet4_samples = mergeEveryThree(sampleList)
-      console.log(data)
-
-      setWord(data)
-    }
-
-    getWord()
-  }, [fetchData, index])
   // 获取音频
   const { getVoice } = useGetVoice()
   const onPlay = useCallback(
@@ -57,6 +39,42 @@ export default function Detail({ params }: { params: { id: string } }) {
     ),
     [getVoice]
   )
+  useEffect(() => {
+    const getWord = async () => {
+      if (localStorage.getItem('index') === null) {
+        setIndex(1)
+      }
+      const data = await fetchData(index)
+      const nextData = await fetchData(index+1)
+      const sampleList = data.cet4_samples.split('\n')
+      data.cet4_samples = mergeEveryThree(sampleList)
+
+      setWord(data)
+      setNextWord(nextData)
+    }
+    getWord()
+
+  }, [fetchData, index])
+  //设置认识或不认识
+  const setWordState = useCallback(
+    debounce(
+      async (flag: boolean) => {
+        if (flag) {
+          router.push(`/`)
+          // 设置本地存储索引
+          setIndex(index! + 1)
+          setLocalIndex(index! + 1)
+
+          onPlay('1', nextWord?.cet4_word!)
+        } else {
+          onPlay('1', word?.cet4_word!)
+          router.push(`/`)
+        }
+      },
+      300 // 设置延迟时间，以毫秒为单位
+    ),
+    [index, onPlay]
+  )
   // 触发显示效果
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -68,6 +86,7 @@ export default function Detail({ params }: { params: { id: string } }) {
       clearTimeout(timeoutId)
     }
   }, [onPlay])
+  useKeydown({ onPlay, word, setWordState })
   return (
     <>
       <div className="detail-container">
@@ -106,7 +125,10 @@ export default function Detail({ params }: { params: { id: string } }) {
             {word?.cet4_distortion}
           </div>
         </div>
-        <RightOutlined className="RightOutlined" />
+        <RightOutlined
+          onClick={() => setWordState(params.id[1] === 'know' ? true : false)}
+          className="RightOutlined"
+        />
       </div>
     </>
   )
