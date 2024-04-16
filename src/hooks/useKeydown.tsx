@@ -5,12 +5,14 @@ type tsProp = {
   word: { cet4_word: string } | undefined
   setWordState?: (flag: boolean) => void
   banKeydown?: string
+  flag?: string
 }
 export default function useKeydown({
   onPlay,
   word,
   setWordState,
   banKeydown,
+  flag,
 }: tsProp) {
   useEffect(() => {
     const handleKeyDown = debounce((event: KeyboardEvent) => {
@@ -29,7 +31,13 @@ export default function useKeydown({
         }
         if (event.key === 'ArrowRight') {
           // 在按下 右方向键 时触发
-          setWordState(true)
+          if (flag && flag === 'know') {
+            setWordState(true)
+          } else if (flag && flag === 'forget') {
+            setWordState(false)
+          } else {
+            setWordState(true)
+          }
         }
       }
     }, 300)

@@ -12,8 +12,13 @@ import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
 import Prompt from '../prompt/page'
+import { Statistic } from 'antd'
 
 export default function Word() {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    setCount(getLocalIndex() || 0)
+  })
   const router = useRouter()
   // 动态class
   const [isUSActive, setIsUSActive] = useState(false)
@@ -126,6 +131,12 @@ export default function Word() {
         </div>
       </div>
       <Prompt></Prompt>
+      <Statistic
+        className="word-statistic"
+        title="已完成"
+        value={count}
+        suffix="/ 4,485"
+      />
     </>
   )
 }

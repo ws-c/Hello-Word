@@ -81,3 +81,8 @@
 .audio-active{
   filter: grayscale(0%);
 }
+.word-statistic{
+  position: absolute;
+  top: 8px;
+  left: 40px;
+}

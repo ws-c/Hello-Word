@@ -34,17 +34,28 @@ body {
   color: var(--text-color);
 }
 .logo {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   color: var(--primary-color);
+}
+.logo::before{
+  content: '\01F426';
+  font-size: 30px;
 }
 .tool-bar {
   position: absolute;
   right: 80px;
   display: flex;
-  gap: 50px;
+  align-items: center;
+  gap: 40px;
   color: rgb(199, 199, 199);
   font-size: 25px;
+}
+.Header-Font {
+  font-size: 32px;
+}
+.Header-Font:hover {
+  color: var(--primary-color);
 }
 .main-container {
   position: relative;

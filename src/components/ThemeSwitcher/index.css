@@ -1,7 +1,6 @@
 /* 设置开关外部容器的样式 */
 .switch {
   position: relative;
-  top: 5px;
   display: inline-block;
   width: 52px;
   height: 25px;
@@ -22,7 +21,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(182, 168, 168, 0.7);
+  background-color: rgba(137, 125, 125, 0.7);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 34px;

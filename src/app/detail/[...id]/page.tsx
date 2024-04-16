@@ -11,8 +11,9 @@ import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
-import { mergeEveryThree } from '@/utils/stringSplit'
+import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
+import { Divider } from 'antd'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
   const router = useRouter()
@@ -48,7 +49,10 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       const data = await fetchData(index)
       const nextData = await fetchData(index + 1)
       const sampleList = data.cet4_samples.split('\n')
-      data.cet4_samples = mergeEveryThree(sampleList)
+      const phraseList = data.cet4_phrase.split('\n')
+      data.cet4_samples = mergeEveryNumber(sampleList, 3, true)
+      data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
+      console.log(data.cet4_phrase)
 
       setWord(data)
       setNextWord(nextData)
@@ -86,12 +90,14 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       clearTimeout(timeoutId)
     }
   }, [onPlay])
-  useKeydown({ onPlay, word, setWordState })
+  useKeydown({ onPlay, word, setWordState, flag: params.id[1] })
   return (
     <>
       <div className="detail-container">
         <div className="detail-head">
-          <div className={params.id[1] === 'forget' ? 'forget-word word' : 'word'}>
+          <div
+            className={params.id[1] === 'forget' ? 'forget-word word' : 'word'}
+          >
             {word?.cet4_word}
           </div>
           <div className="soundmark">
@@ -115,13 +121,27 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           <div className="samples">
             <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any) => {
-              return <p key={item}>{item}</p>
+              return (
+                <div key={item}>
+                  <p>{item}</p>
+                  <Divider />
+                </div>
+              )
             })}
           </div>
 
           <div className="phrase">
             <div className="content-tag">词组短语</div>
-            {word?.cet4_phrase}
+            <div className="phrase-list">
+              {word?.cet4_phrase.map((item: any) => {
+                return (
+                  <div key={item}>
+                    <span>{item}</span>
+                    <i>|</i>
+                  </div>
+                )
+              })}
+            </div>
           </div>
           <div className="distortion">
             <div className="content-tag">派生词</div>
