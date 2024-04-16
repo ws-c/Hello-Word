@@ -45,7 +45,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
         setIndex(1)
       }
       const data = await fetchData(index)
-      const nextData = await fetchData(index+1)
+      const nextData = await fetchData(index + 1)
       const sampleList = data.cet4_samples.split('\n')
       data.cet4_samples = mergeEveryThree(sampleList)
 
@@ -53,7 +53,6 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       setNextWord(nextData)
     }
     getWord()
-
   }, [fetchData, index])
   //设置认识或不认识
   const setWordState = useCallback(
@@ -91,7 +90,9 @@ export default function Detail({ params }: { params: { id: string[] } }) {
     <>
       <div className="detail-container">
         <div className="detail-head">
-          <div className="word">{word?.cet4_word}</div>
+          <div className={params.id[1] === 'forget' ? 'forget-word word' : 'word'}>
+            {word?.cet4_word}
+          </div>
           <div className="soundmark">
             <span>{word?.cet4_phonetic}</span>
             <Image
@@ -111,17 +112,18 @@ export default function Detail({ params }: { params: { id: string[] } }) {
         <div className="detail-body">
           <div className="translate">{word?.cet4_translate}</div>
           <div className="samples">
-            <p className="content-tag">例句：</p>
+            <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any) => {
               return <p key={item}>{item}</p>
             })}
           </div>
+
           <div className="phrase">
-            <p className="content-tag">词组短语：</p>
+            <div className="content-tag">词组短语</div>
             {word?.cet4_phrase}
           </div>
           <div className="distortion">
-            <p className="content-tag">派生词：</p>
+            <div className="content-tag">派生词</div>
             {word?.cet4_distortion}
           </div>
         </div>

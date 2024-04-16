@@ -42,7 +42,6 @@ export default function Word() {
     ),
     [getVoice]
   )
-  // 第一次渲染
   useEffect(() => {
     const getWord = async () => {
       if (localStorage.getItem('index') === null) {
@@ -65,6 +64,7 @@ export default function Word() {
           setIndex(index! + 1)
           setLocalIndex(index! + 1)
         } else {
+          router.push(`/detail/${index}/forget`)
           setIsForgetActive(true)
         }
       },
@@ -111,10 +111,6 @@ export default function Word() {
           </div>
         </div>
         <div className="body">
-          {/* <div className="sentence">
-            <p>{word?.cet4_samples}</p>
-            <p>我祝她生日快乐。</p>
-          </div> */}
           <span
             className={isKnowActive ? 'know-active' : ''}
             onClick={() => setWordState(true)}

@@ -26,7 +26,7 @@ html[data-theme='dark'] {
   --contentBg: rgba(69, 62, 62, 0.348);
   --contentBgShadow: rgba(255, 255, 255, 0.1);
 }
-html{
+html {
   width: 100vw;
 }
 body {
@@ -47,12 +47,11 @@ body {
   font-size: 25px;
 }
 .main-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
   min-height: 780px;
+  width: 95%;
   background-color: var(--background-color1);
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
 }

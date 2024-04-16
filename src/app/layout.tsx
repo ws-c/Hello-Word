@@ -38,9 +38,7 @@ export default function RootLayout({
           </header>
           <main
             style={{
-              width: '100vw',
               paddingTop: '120px',
-              paddingBottom: '40px',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -51,9 +49,10 @@ export default function RootLayout({
 
           <footer
             style={{
-              width: '100vw',
+              paddingTop: '40px',
               textAlign: 'center',
               height: '32px',
+              lineHeight: '32px',
             }}
           >
             Local-word ©{new Date().getFullYear()} Created by WGenji
