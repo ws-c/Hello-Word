@@ -19,7 +19,7 @@
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
-  --text-color: #ffffff;
+  --text-color: rgba(255, 255, 255, 0.8);
   --background-color1: #121212;
   --background-color2: #000000;
   --colorBgElevated: #f5deb300;
