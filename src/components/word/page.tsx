@@ -12,7 +12,7 @@ import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
 import Prompt from '../prompt/page'
-import { Divider, Statistic } from 'antd'
+import { Statistic } from 'antd'
 
 export default function Word() {
   const [count, setCount] = useState(0)
@@ -99,7 +99,7 @@ export default function Word() {
       <div className="word-container">
         <div className="head">
           <span>{word?.cet4_word}</span>
-          <p>{word?.cet4_phonetic}</p>
+          <div>{word?.cet4_phonetic}</div>
           <div className="icon-container">
             <Image
               onClick={() => onPlay('1', word?.cet4_word!)}
@@ -122,7 +122,7 @@ export default function Word() {
           >
             认识
           </span>
-          <Divider dashed={true}></Divider>
+          <div className="divider"></div>
           <span
             className={isForgetActive ? 'forget-active' : ''}
             onClick={() => setWordState(false)}

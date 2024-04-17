@@ -1,5 +1,5 @@
 'use client'
-import { RightOutlined } from '@ant-design/icons'
+import { RightOutlined, StarFilled, StarOutlined } from '@ant-design/icons'
 import './index.css'
 import Image from 'next/image'
 import icon from '@/assets/trumpet.png'
@@ -10,7 +10,7 @@ import useGetData from '@/hooks/useGetData'
 import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
-import { setLocalIndex } from '@/utils/localStorage'
+import { getLocalStar, setLocalIndex, setLocalStar } from '@/utils/localStorage'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
 import { Divider } from 'antd'
@@ -24,7 +24,18 @@ export default function Detail({ params }: { params: { id: string[] } }) {
   const [word, setWord] = useState<word_sample_filter>()
   const [nextWord, setNextWord] = useState<word_sample_filter>()
   const { fetchData } = useGetData()
-
+  // 收藏单词
+  const [starWord, setStarWord] = useState<string>('')
+  const [isStar, setIsStar] = useState(false)
+  const setStar = (flag: boolean, word: string) => {
+    setIsStar(flag)
+    if(flag){
+      setStarWord(starWord)
+      const starList = getLocalStar()
+      starList.push(word)
+      setLocalStar(starList)
+    }
+  }
   // 获取音频
   const { getVoice } = useGetVoice()
   const onPlay = useCallback(
@@ -114,6 +125,17 @@ export default function Detail({ params }: { params: { id: string[] } }) {
               alt="trumpet"
               className={isUSActive ? 'audio-active audio' : 'audio'}
             ></Image>
+            {isStar === false ? (
+              <StarOutlined
+                className="StarOutlined"
+                onClick={() => setStar(true, word?.cet4_word!)}
+              />
+            ) : (
+              <StarFilled
+                className="StarFilled"
+                onClick={() => setStar(false, word?.cet4_word!)}
+              />
+            )}
           </div>
         </div>
         <div className="detail-body">
