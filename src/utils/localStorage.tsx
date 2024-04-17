@@ -21,14 +21,3 @@ export const getLocalTheme = () => {
   }
 }
 
-export const setLocalStar = (star: string[]) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('star', JSON.stringify(star))
-  }
-}
-
-export const getLocalStar = () => {
-  if (typeof window !== 'undefined') {
-    return JSON.parse(localStorage.getItem('star') || '[]')
-  }
-}

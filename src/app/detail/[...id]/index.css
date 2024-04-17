@@ -74,6 +74,7 @@
   padding: 16px;
   background-color: var(--contentBg);
   box-shadow: 0 2px 4px var(--contentBgShadow);
+  margin-bottom: 20px;
 }
 
 .detail-body .phrase {
@@ -113,14 +114,15 @@
   color: var(--contentTag);
 }
 .forget-word {
-  color: #ff591d;
+  color: #ff4000;
 }
 .ant-divider-horizontal {
   margin: 0 !important;
 }
+.divider{
+  border-block-start: 1px solid var(--ant-list-item-divider) !important;
+}
 .StarOutlined {
-  position: relative;
-  top: 1px;
   font-size: 26px;
   margin-left: 4px;
   color: #999b9f !important;
@@ -129,8 +131,6 @@
   color: #ffa616 !important;
 }
 .StarFilled {
-  position: relative;
-  top: 1px;
   font-size: 26px;
   margin-left: 4px;
   color: #ffa616 !important;

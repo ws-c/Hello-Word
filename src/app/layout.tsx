@@ -29,12 +29,12 @@ export default function RootLayout({
             <div className="tool-bar">
               <ThemeSwitcher></ThemeSwitcher>
               <div>
-                <SearchOutlined className="Header-Font"></SearchOutlined>
+                <SearchOutlined className="Header-Font search-icon"></SearchOutlined>
               </div>
               <div>
                 <Link href="/star-book">
                   <Image
-                    className="Header-Font"
+                    className="Header-Font starBook-icon"
                     src={starBook}
                     alt="starBook"
                     width={30}

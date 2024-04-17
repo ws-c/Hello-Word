@@ -1,7 +1,54 @@
 .star-book {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 1200px;
   height: 780px;
   padding: 15px;
+  margin: 20px 0 40px 0;
+  backdrop-filter: blur(20px);
+  background-color: var(--starBook-box);
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--starBook-box-shadow);
+}
+.star-book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.star-book-close {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: var(--text-color) !important;
+}
+.star-book-close:hover {
+  color: red !important;
+}
+.star-book-title span {
+  font-size: 18px;
+  color: var(--text-color);
+  padding-right: 4px;
+}
+.star-book-title span:last-child {
+  font-size: 24px;
+  color: #ff4000;
+}
+.star-book-description {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-color2);
+}
+.ant-list-item {
+  border-block-end: 1px solid var(--ant-list-item-divider) !important;
+}
+.ant-pagination{
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%)
 }

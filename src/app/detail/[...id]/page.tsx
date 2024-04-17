@@ -10,7 +10,7 @@ import useGetData from '@/hooks/useGetData'
 import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
-import { getLocalStar, setLocalIndex, setLocalStar } from '@/utils/localStorage'
+import { setLocalIndex } from '@/utils/localStorage'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
 import { Divider } from 'antd'
@@ -25,15 +25,19 @@ export default function Detail({ params }: { params: { id: string[] } }) {
   const [nextWord, setNextWord] = useState<word_sample_filter>()
   const { fetchData } = useGetData()
   // 收藏单词
-  const [starWord, setStarWord] = useState<string>('')
   const [isStar, setIsStar] = useState(false)
-  const setStar = (flag: boolean, word: string) => {
+  const setStar = (flag: boolean, index: number) => {
     setIsStar(flag)
-    if(flag){
-      setStarWord(starWord)
-      const starList = getLocalStar()
-      starList.push(word)
-      setLocalStar(starList)
+    if (flag) {
+      // const starList = getLocalStar()
+      // starList.push(index)
+      // setLocalStar(starList)
+      fetch(`/apis/setStar?id=${index}`)
+    } else {
+      fetch(`/apis/delStar?id=${index}`)
+      // const starList = getLocalStar()
+      // const newArr = starList.filter((item: number) => item !== index)
+      // setLocalStar(newArr)
     }
   }
   // 获取音频
@@ -128,12 +132,12 @@ export default function Detail({ params }: { params: { id: string[] } }) {
             {isStar === false ? (
               <StarOutlined
                 className="StarOutlined"
-                onClick={() => setStar(true, word?.cet4_word!)}
+                onClick={() => setStar(true, index)}
               />
             ) : (
               <StarFilled
                 className="StarFilled"
-                onClick={() => setStar(false, word?.cet4_word!)}
+                onClick={() => setStar(false, index)}
               />
             )}
           </div>
@@ -144,9 +148,9 @@ export default function Detail({ params }: { params: { id: string[] } }) {
             <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any) => {
               return (
-                <div key={item}>
+                <div key={item} style={{ marginBottom: '8px' }}>
                   <p>{item}</p>
-                  <Divider />
+                  <Divider className="divider"></Divider>
                 </div>
               )
             })}

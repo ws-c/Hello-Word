@@ -1,36 +1,56 @@
 'use client'
+import useGetStarList from '@/hooks/useGetStarList'
 import './index.css'
-import { List } from 'antd'
-import { useState } from 'react'
+import { word } from '@/types/word'
+import { List, Pagination } from 'antd'
+import { useEffect, useState } from 'react'
+import { CloseOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-]
 export default function StarBook() {
+  const [wordList, setWordList] = useState<word[]>()
+  const { fetchStarList } = useGetStarList()
+  const [currentPage, setCurrentPage] = useState(1)
+  useEffect(() => {
+    const getWordList = async () => {
+      const res = await fetchStarList(currentPage)
+      setWordList(res)
+    }
+    getWordList()
+  }, [currentPage, fetchStarList])
   return (
-    <div className='star-book'>
+    <div className="star-book">
       <List
+        header={
+          <div className="star-book-header">
+            <span>收藏单词本</span>
+            <Link href="/">
+              <CloseOutlined className="star-book-close" />
+            </Link>
+          </div>
+        }
         itemLayout="horizontal"
-        dataSource={data}
+        dataSource={wordList}
         renderItem={(item, index) => (
-          <List.Item className='error-book-item'>
+          <List.Item>
             <List.Item.Meta
-              title={<a href="https://ant.design">{index+1}. {item.title}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              title={
+                <div className="star-book-title">
+                  <span>{index + 1}.</span> <span>{item.cet4_word}</span>
+                </div>
+              }
+              description={
+                <p className="star-book-description">{item.cet4_translate}</p>
+              }
             />
           </List.Item>
         )}
+      />
+      <Pagination
+        defaultPageSize={8}
+        defaultCurrent={1}
+        total={50}
+        hideOnSinglePage={true}
       />
     </div>
   )

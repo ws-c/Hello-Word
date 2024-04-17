@@ -66,8 +66,10 @@ export default function Word() {
           router.push(`/detail/${index}/know`)
           setIsKnowActive(true)
           // 设置本地存储索引
-          setIndex(index! + 1)
-          setLocalIndex(index! + 1)
+          setTimeout(() => {
+            setIndex(index! + 1)
+            setLocalIndex(index! + 1)
+          }, 500)
         } else {
           router.push(`/detail/${index}/forget`)
           setIsForgetActive(true)

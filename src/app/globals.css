@@ -19,6 +19,7 @@ a {
 :root {
   --primary-color: #f5deb3;
   --text-color: rgba(0, 0, 0, 0.8);
+  --text-color2: rgba(0, 0, 0, 0.6);
   --background-color1: #fff;
   --background-color2: #f5f5f5;
   --colorBgElevated: #ffffff;
@@ -27,10 +28,14 @@ a {
   --headerShadow: rgba(38, 93, 221, 0.6);
   --ant-statistic-content-value: #63bcaf;
   --contentTag: rgba(0, 0, 0, 0.8);
+  --starBook-box: rgba(255, 255, 255, 0.5);
+  --starBook-box-shadow: rgba(0, 0, 0, 0.1);
+  --ant-list-item-divider: rgba(5, 5, 5, 0.06);
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
   --text-color: rgba(255, 255, 255, 0.8);
+  --text-color2: rgba(255, 255, 255, 0.6);
   --background-color1: #121212;
   --background-color2: #000000;
   --colorBgElevated: #f5deb300;
@@ -39,6 +44,9 @@ html[data-theme='dark'] {
   --headerShadow: rgba(16, 0, 240, 0.6);
   --ant-statistic-content-value: #16ffe8;
   --contentTag: #e0f1ffe9;
+  --starBook-box: #242222;
+  --starBook-box-shadow: rgba(255, 255, 255, 0.1);
+  --ant-list-item-divider: rgba(250, 250, 250, 0.06);
 }
 html {
   width: 100vw;
@@ -94,6 +102,14 @@ body {
 }
 .Header-Font {
   font-size: 32px;
+}
+.search-icon {
+  position: relative;
+  top: 1px;
+}
+.starBook-icon {
+  position: relative;
+  top: 3px;
 }
 .main-container {
   position: relative;
