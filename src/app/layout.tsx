@@ -1,15 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
-import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
-import {
-  GithubOutlined,
-  SearchOutlined,
-  SettingOutlined,
-} from '@ant-design/icons'
-import Image from 'next/image'
-import starBook from '@/assets/starBook.png'
+import { GithubOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import TopBar from '@/components/topbar/page'
 export const metadata: Metadata = {
   title: 'Hello Word',
   description: 'Created by WGenji',
@@ -24,33 +18,8 @@ export default function RootLayout({
     <html lang="en" data-theme="">
       <body>
         <AntdRegistry>
-          <header className="header">
-            <Link href="/">
-              <div className="logo">
-                <span>Hello Word</span>
-              </div>
-            </Link>
-            <div className="tool-bar">
-              <ThemeSwitcher></ThemeSwitcher>
-              <div>
-                <SearchOutlined className="Header-Font search-icon"></SearchOutlined>
-              </div>
-              <div>
-                <Link href="/star-book">
-                  <Image
-                    className="Header-Font starBook-icon"
-                    src={starBook}
-                    alt="starBook"
-                    width={30}
-                    height={32}
-                  ></Image>
-                </Link>
-              </div>
-              <div>
-                <SettingOutlined className="Header-Font"></SettingOutlined>
-              </div>
-            </div>
-          </header>
+          <TopBar></TopBar>
+
           <main
             style={{
               paddingTop: '96px',

@@ -13,8 +13,10 @@ import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
 import Prompt from '../prompt/page'
 import { Statistic } from 'antd'
+import { useSettingStore } from '@/store/settingStore'
 
 export default function Word() {
+  const { isMuted } = useSettingStore()
   const [count, setCount] = useState(0)
   useEffect(() => {
     setCount(getLocalIndex() || 0)
@@ -36,6 +38,7 @@ export default function Word() {
   const onPlay = useCallback(
     debounce(
       (type: string, audio: string) => {
+        if (isMuted) return
         getVoice(type, audio)
         if (type === '1') {
           setIsUKActive(true)

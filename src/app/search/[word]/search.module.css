@@ -1,0 +1,10 @@
+.close {
+  position: absolute;
+  top: 32px;
+  right: 64px;
+  color: var(--text-color) !important;
+  font-size: 30px;
+}
+.close:hover {
+  color: red !important;
+}

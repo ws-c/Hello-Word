@@ -6,14 +6,30 @@ import { List, Pagination, Spin } from 'antd' // 引入 Spin 组件来显示加�
 import { useCallback, useEffect, useState } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import icon from '@/assets/trumpet.png'
+import Image from 'next/image'
+import useGetVoice from '@/hooks/useGetVoice'
+import debounce from '@/utils/debounce'
+import { useSettingStore } from '@/store/settingStore'
 
 export default function StarBook() {
+  const { isMuted } = useSettingStore()
   const [wordList, setWordList] = useState<word[]>()
   const { fetchStarList } = useGetStarList()
   const [currentPage, setCurrentPage] = useState(1)
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(true) // 添加 loading 状态
-
+  // 获取音频
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const { getVoice } = useGetVoice()
+  const onPlay = useCallback(
+    debounce((type: string, audio: string, index: number) => {
+      setActiveIndex(index)
+      if (isMuted) return
+      getVoice(type, audio)
+    }, 300),
+    [getVoice]
+  )
   // 获取收藏单词总数
   const getSun = async () => {
     const response = await fetch(`/apis/starList/getStarListSum`)
@@ -47,7 +63,16 @@ export default function StarBook() {
     getWordList()
     getSun()
   }
+  // 触发显示效果
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setActiveIndex(null)
+    }, 300)
 
+    return () => {
+      clearTimeout(timeoutId)
+    }
+  }, [onPlay, setActiveIndex])
   return (
     <div className="star-book">
       <div className="star-book-header">
@@ -58,7 +83,7 @@ export default function StarBook() {
       </div>
       {loading ? ( // 根据 loading 状态来决定是否显示加载状态
         <div className="Spin">
-          <Spin size='large'/>
+          <Spin size="large" />
         </div>
       ) : (
         <List
@@ -80,6 +105,16 @@ export default function StarBook() {
                 title={
                   <div className="star-book-title">
                     <span>{index + 1}.</span> <span>{item.cet4_word}</span>
+                    <Image
+                      onClick={() => onPlay('1', item.cet4_word, index)}
+                      src={icon}
+                      alt="trumpet"
+                      width={20}
+                      height={20}
+                      className={`${
+                        activeIndex === index ? 'audio-active ' : ''
+                      } audio star-audio`}
+                    ></Image>
                   </div>
                 }
                 description={

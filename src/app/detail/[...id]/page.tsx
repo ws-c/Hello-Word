@@ -13,8 +13,10 @@ import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
+import { useSettingStore } from '@/store/settingStore'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
+  const { isMuted } = useSettingStore()
   const router = useRouter()
   const [isUSActive, setIsUSActive] = useState(false)
   const [isUKActive, setIsUKActive] = useState(false)
@@ -33,11 +35,19 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       fetch(`/apis/delStar?id=${index}`)
     }
   }
+  const isExist = useCallback(async (id: number) => {
+    const res = await fetch(`/apis/isStar?id=${id}`)
+    const { data } = await res.json()
+    if (data && data[0].count > 0) {
+      setIsStar(true)
+    }
+  }, [])
   // 获取音频
   const { getVoice } = useGetVoice()
   const onPlay = useCallback(
     debounce(
       (type: string, audio: string) => {
+        if (isMuted) return
         getVoice(type, audio)
         if (type === '1') {
           setIsUKActive(true)
@@ -60,10 +70,10 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       const phraseList = data.cet4_phrase.split('\n')
       data.cet4_samples = mergeEveryNumber(sampleList, 3, true)
       data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
-      console.log(data.cet4_phrase)
-
       setWord(data)
       setNextWord(nextData)
+
+      isExist(index)
     }
     getWord()
   }, [fetchData, index])
@@ -141,7 +151,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
             <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any) => {
               return (
-                <div key={item} className='samples-item'>
+                <div key={item} className="samples-item">
                   <p>{item}</p>
                 </div>
               )

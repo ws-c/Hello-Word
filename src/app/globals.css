@@ -22,8 +22,9 @@ a {
   --text-color2: rgba(0, 0, 0, 0.6);
   --background-color1: #fff;
   --background-color2: #f5f5f5;
+  --background-color3: #f5f5f5;
   --colorBgElevated: #ffffff;
-  --contentBg: #dadde2b1;
+  --contentBg: #00000006;
   --contentBgShadow: rgba(0, 0, 0, 0.1);
   --headerShadow: rgba(38, 93, 221, 0.6);
   --ant-statistic-content-value: #63bcaf;
@@ -32,6 +33,7 @@ a {
   --starBook-box-shadow: rgba(0, 0, 0, 0.1);
   --ant-list-item-divider: rgba(5, 5, 5, 0.06);
   --ant-pagination-item-a: rgba(0, 0, 0, 0.88);
+  --ant-list-item-even: rgba(249, 249, 249, 0.5);
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
@@ -39,6 +41,7 @@ html[data-theme='dark'] {
   --text-color2: rgba(255, 255, 255, 0.6);
   --background-color1: #121212;
   --background-color2: #000000;
+  --background-color3: #111827;
   --colorBgElevated: #f5deb300;
   --contentBg: rgba(69, 62, 62, 0.348);
   --contentBgShadow: rgba(255, 255, 255, 0.1);
@@ -49,6 +52,7 @@ html[data-theme='dark'] {
   --starBook-box-shadow: rgba(255, 255, 255, 0.1);
   --ant-list-item-divider: rgba(250, 250, 250, 0.06);
   --ant-pagination-item-a: rgba(255, 255, 255, 0.88);
+  --ant-list-item-even: #26262c83;
 }
 html {
   width: 100vw;
@@ -130,8 +134,23 @@ body {
   text-align: center;
   height: 32px;
   line-height: 32px;
+  color: var(--text-color) !important;
 }
-.github-icon{
+.github-icon {
   margin-left: 10px;
   color: var(--text-color) !important;
+}
+.Setting {
+  color: #c7c7c7 !important;
+}
+.ant-drawer-content {
+  background-color: var(--background-color3) !important;
+}
+.ant-drawer-close{
+  font-size: 18px !important;
+  color: var(--text-color1) !important;
+}
+.ant-drawer-title{
+  font-size: 18px !important;
+  color: var(--text-color1) !important;
 }
