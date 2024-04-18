@@ -31,6 +31,7 @@ a {
   --starBook-box: rgba(255, 255, 255, 0.5);
   --starBook-box-shadow: rgba(0, 0, 0, 0.1);
   --ant-list-item-divider: rgba(5, 5, 5, 0.06);
+  --ant-pagination-item-a: rgba(0, 0, 0, 0.88);
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
@@ -47,6 +48,7 @@ html[data-theme='dark'] {
   --starBook-box: #242222;
   --starBook-box-shadow: rgba(255, 255, 255, 0.1);
   --ant-list-item-divider: rgba(250, 250, 250, 0.06);
+  --ant-pagination-item-a: rgba(255, 255, 255, 0.88);
 }
 html {
   width: 100vw;

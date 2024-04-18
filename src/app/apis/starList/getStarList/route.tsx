@@ -14,7 +14,6 @@ export async function GET(request: any) {
     const [rows, fields] = await connection.query(
       `SELECT id,cet4_word,cet4_translate FROM cet4_starlist limit ${idNum},7`
     )
-
     // 释放连接回连接池
     connection.release()
 

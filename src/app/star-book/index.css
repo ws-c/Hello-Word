@@ -24,6 +24,7 @@
   cursor: pointer;
   transition: color 0.3s ease;
   color: var(--text-color) !important;
+  padding-right: 18px;
 }
 .star-book-close:hover {
   color: red !important;
@@ -46,9 +47,38 @@
 .ant-list-item {
   border-block-end: 1px solid var(--ant-list-item-divider) !important;
 }
-.ant-pagination{
+.ant-pagination {
   position: absolute;
   bottom: 8px;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+}
+.ant-pagination button {
+  color: var(--ant-pagination-item-a) !important;
+}
+.ant-pagination-item a {
+  color: var(--ant-pagination-item-a) !important;
+}
+.ant-pagination-item-active {
+  background-color: transparent !important;
+}
+.star-book-delete {
+  color: var(--text-color);
+  box-shadow: 0 0 4px var(--starBook-box-shadow);
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.star-book-delete:hover {
+  color: red;
+}
+.ant-empty-description {
+  color: var(--text-color) !important;
+}
+.Spin {
+  position: fixed !important;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

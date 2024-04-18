@@ -116,12 +116,6 @@
 .forget-word {
   color: #ff4000;
 }
-.ant-divider-horizontal {
-  margin: 0 !important;
-}
-.divider{
-  border-block-start: 1px solid var(--ant-list-item-divider) !important;
-}
 .StarOutlined {
   font-size: 26px;
   margin-left: 4px;
@@ -134,4 +128,10 @@
   font-size: 26px;
   margin-left: 4px;
   color: #ffa616 !important;
+}
+.samples-item {
+  margin-bottom: 16px;
+}
+.samples-item:last-child {
+  margin-bottom: 0;
 }

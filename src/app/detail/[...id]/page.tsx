@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
-import { Divider } from 'antd'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
   const router = useRouter()
@@ -29,15 +28,9 @@ export default function Detail({ params }: { params: { id: string[] } }) {
   const setStar = (flag: boolean, index: number) => {
     setIsStar(flag)
     if (flag) {
-      // const starList = getLocalStar()
-      // starList.push(index)
-      // setLocalStar(starList)
       fetch(`/apis/setStar?id=${index}`)
     } else {
       fetch(`/apis/delStar?id=${index}`)
-      // const starList = getLocalStar()
-      // const newArr = starList.filter((item: number) => item !== index)
-      // setLocalStar(newArr)
     }
   }
   // 获取音频
@@ -148,9 +141,8 @@ export default function Detail({ params }: { params: { id: string[] } }) {
             <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any) => {
               return (
-                <div key={item} style={{ marginBottom: '8px' }}>
+                <div key={item} className='samples-item'>
                   <p>{item}</p>
-                  <Divider className="divider"></Divider>
                 </div>
               )
             })}

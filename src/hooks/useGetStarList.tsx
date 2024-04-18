@@ -4,7 +4,7 @@ export default function useGetStarList() {
   const fetchStarList = useCallback(async (currentPage: number) => {
     try {
       const response = await fetch(
-        `/apis/getStarList?currentpage=${currentPage}`
+        `/apis/starList/getStarList?currentpage=${currentPage}`
       )
       const res = await response.json()
       return res.data
