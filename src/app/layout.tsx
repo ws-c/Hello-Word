@@ -2,7 +2,11 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
-import { SearchOutlined, SettingOutlined } from '@ant-design/icons'
+import {
+  GithubOutlined,
+  SearchOutlined,
+  SettingOutlined,
+} from '@ant-design/icons'
 import Image from 'next/image'
 import starBook from '@/assets/starBook.png'
 import Link from 'next/link'
@@ -60,6 +64,9 @@ export default function RootLayout({
 
           <footer className="Footer">
             Hello-Word ©{new Date().getFullYear()} Created by WGenji
+            <Link href={'https://github.com/WGenji/hello-word'}>
+              <GithubOutlined className="github-icon" />
+            </Link>
           </footer>
         </AntdRegistry>
       </body>
