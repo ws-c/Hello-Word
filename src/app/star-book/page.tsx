@@ -10,7 +10,7 @@ import icon from '@/assets/trumpet.png'
 import Image from 'next/image'
 import useGetVoice from '@/hooks/useGetVoice'
 import debounce from '@/utils/debounce'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/useStore'
 
 export default function StarBook() {
   const { isMuted } = useSettingStore()

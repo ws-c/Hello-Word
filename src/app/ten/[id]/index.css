@@ -1,0 +1,96 @@
+.star-book {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  height: 780px;
+  padding: 15px;
+  margin: 20px 0 40px 0;
+  backdrop-filter: blur(20px);
+  background-color: var(--starBook-box);
+  border-radius: 15px;
+  box-shadow: 0 0 10px var(--starBook-box-shadow);
+}
+.star-book-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24px;
+  letter-spacing: 4px;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.star-book-close {
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: var(--text-color) !important;
+  padding-right: 18px;
+}
+.star-book-close:hover {
+  color: red !important;
+}
+.star-book-title span {
+  font-size: 18px;
+  color: var(--text-color);
+  padding-right: 4px;
+}
+.star-book-title span:nth-child(2) {
+  font-size: 24px;
+  color: #ff4000;
+}
+.star-audio {
+  position: relative;
+  top: 4px;
+  left: 8px;
+}
+.star-book-description {
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-color2);
+}
+.ant-list-item {
+  border-block-end: 1px solid var(--ant-list-item-divider) !important;
+}
+.ant-list-item:nth-child(even) {
+  background-color: var(--ant-list-item-even);
+}
+.ant-pagination {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ant-pagination button {
+  color: var(--ant-pagination-item-a) !important;
+}
+.ant-pagination-item a {
+  color: var(--ant-pagination-item-a) !important;
+}
+.ant-pagination-item-active {
+  background-color: transparent !important;
+}
+.star-book-delete {
+  color: var(--text-color);
+  box-shadow: 0 0 4px var(--starBook-box-shadow);
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.star-book-delete:hover {
+  color: red;
+}
+.ant-empty-description {
+  color: var(--text-color) !important;
+}
+.Spin {
+  position: fixed !important;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.github-icon {
+  margin-left: 20px !important;
+}

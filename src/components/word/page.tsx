@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
 import Prompt from '../prompt/page'
 import { Statistic } from 'antd'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/useStore'
 
 export default function Word() {
   const { isMuted } = useSettingStore()

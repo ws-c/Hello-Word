@@ -1,7 +1,7 @@
 'use client'
 import { Drawer, Switch } from 'antd'
 import style from './index.module.css'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/useStore'
 interface ChildProps {
   onClose: () => void
 }

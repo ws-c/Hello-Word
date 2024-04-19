@@ -1,7 +1,7 @@
 'use client'
 import './index.css'
 import useGetVoice from '@/hooks/useGetVoice'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/useStore'
 import debounce from '@/utils/debounce'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import { useCallback, useEffect, useState } from 'react'

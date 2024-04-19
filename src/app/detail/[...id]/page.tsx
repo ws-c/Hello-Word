@@ -13,9 +13,11 @@ import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
 import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/useStore'
+import { useTenWordStore } from '@/store/useStore'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
+  const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
   const { isMuted } = useSettingStore()
   const router = useRouter()
   const [isUSActive, setIsUSActive] = useState(false)
@@ -76,7 +78,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       isExist(index)
     }
     getWord()
-  }, [fetchData, index])
+  }, [fetchData, index, isExist])
   //设置认识或不认识
   const setWordState = useCallback(
     debounce(
@@ -86,7 +88,12 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           // 设置本地存储索引
           setIndex(index! + 1)
           setLocalIndex(index! + 1)
-
+          addTenWord()
+          if (tenWord === 10) {
+            router.push(`/ten/${index}`)
+            formatTenWord()
+            return
+          }
           onPlay('1', nextWord?.cet4_word!)
         } else {
           onPlay('1', word?.cet4_word!)

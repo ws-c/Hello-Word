@@ -1,0 +1,63 @@
+.tenItem {
+  padding: 0 !important;
+}
+.tenItem:first-child {
+  padding-top: 8px !important;
+}
+.tenTitle {
+  font-size: 18px;
+  color: var(--text-color2);
+}
+.tenTitle span:nth-child(2) {
+  margin-left: 4px;
+  font-size: 24px;
+  color: var(--text-color);
+}
+.right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 3vw;
+  font-size: 80px;
+}
+.right:hover {
+  background-color: #c4c1c1;
+  border-radius: 8px;
+}
+.itemDescription {
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-color2);
+  display: none;
+}
+.active {
+  margin-top: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-color2);
+  display: block;
+}
+.hideDescription {
+  margin-top: 10px;
+  height: 22px;
+  background: linear-gradient(
+    45deg,
+    var(--hideDescription) 25%,
+    transparent 25%,
+    transparent 50%,
+    var(--hideDescription) 50%,
+    var(--hideDescription) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 8px 8px; /* 控制条纹的宽度和间距 */
+}
+.NoHideDescription {
+  margin-top: 10px;
+  height: 22px;
+  background-color: #a14747;
+  display: none;
+}
