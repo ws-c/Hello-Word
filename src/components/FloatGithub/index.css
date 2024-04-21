@@ -1,0 +1,17 @@
+.githubIcon {
+  color: var(--text-color) !important;
+}
+.ant-float-btn-body {
+  background-color: var(--background-color2) !important;
+  box-shadow: var(--contentBgShadow);
+}
+.ant-float-btn {
+  box-shadow: 0 6px 16px 0 var(--contentBgShadow) !important;
+  right: 80px !important;
+  bottom: 80px !important;
+  transition: transform 0.3s;
+}
+
+.ant-float-btn:hover {
+  transform: scale(1.1);
+}

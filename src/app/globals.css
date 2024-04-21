@@ -10,12 +10,12 @@ a {
   .logo {
     display: none;
   }
-}
-@media screen and (max-height: 900px) {
-  .Footer {
+  .ant-float-btn {
     display: none;
   }
 }
+
+
 :root {
   --primary-color: #f5deb3;
   --text-color: rgba(0, 0, 0, 0.8);
@@ -57,7 +57,7 @@ html[data-theme='dark'] {
   --hideDescription: #99999930;
 }
 html {
-  width: 100vw;
+  width: 100%;
 }
 .header {
   position: fixed;
@@ -65,10 +65,10 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: #001529;
-  padding: 0 80px;
+  padding: 0 18vw;
   box-shadow: 0 10px 400px var(--headerShadow);
 }
 body {
@@ -77,17 +77,16 @@ body {
 }
 .logo {
   letter-spacing: 1px;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
   color: var(--primary-color);
 }
 .logo::before {
   content: '\01F426';
-  font-size: 40px;
+  font-size: 30px;
 }
 .tool-bar {
-  position: absolute;
-  right: 80px;
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,23 +123,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 780px;
-  width: 95%;
+  min-height: 850px;
+  width: 1300px;
   background-color: var(--background-color1);
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
-}
-.Footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  height: 32px;
-  line-height: 32px;
-  color: var(--text-color) !important;
-}
-.github-icon {
-  margin-left: 10px;
-  color: var(--text-color) !important;
+  border-radius: 8px;
 }
 .Setting {
   color: #c7c7c7 !important;
@@ -148,11 +135,11 @@ body {
 .ant-drawer-content {
   background-color: var(--background-color3) !important;
 }
-.ant-drawer-close{
+.ant-drawer-close {
   font-size: 18px !important;
   color: var(--text-color1) !important;
 }
-.ant-drawer-title{
+.ant-drawer-title {
   font-size: 18px !important;
   color: var(--text-color1) !important;
 }

@@ -2,13 +2,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 1200px;
-  height: 780px;
+  width: 1300px;
+  height: 850px;
   padding: 15px;
-  margin: 20px 0 40px 0;
   backdrop-filter: blur(20px);
   background-color: var(--starBook-box);
-  border-radius: 15px;
+  border-radius: 16px;
   box-shadow: 0 0 10px var(--starBook-box-shadow);
 }
 .star-book-header {
@@ -30,7 +29,7 @@
   color: red !important;
 }
 .star-book-title span {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text-color);
   padding-right: 4px;
 }
@@ -74,7 +73,7 @@
 .star-book-delete {
   color: var(--text-color);
   box-shadow: 0 0 4px var(--starBook-box-shadow);
-  border-radius: 15px;
+  border-radius: 16px;
   padding: 10px;
   cursor: pointer;
   transition: color 0.3s ease;

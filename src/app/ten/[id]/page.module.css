@@ -5,7 +5,7 @@
   padding-top: 8px !important;
 }
 .tenTitle {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--text-color2);
 }
 .tenTitle span:nth-child(2) {
@@ -17,7 +17,7 @@
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  right: 3vw;
+  right: 10vw;
   font-size: 80px;
 }
 .right:hover {
