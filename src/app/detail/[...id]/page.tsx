@@ -11,10 +11,11 @@ import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
 import { setLocalIndex } from '@/utils/localStorage'
-import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
+import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
 import { useSettingStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
+import WordCard from '@/components/wordCard/WordCard'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
   const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
@@ -68,13 +69,14 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       }
       const data = await fetchData(index)
       const nextData = await fetchData(index + 1)
-      const sampleList = data.cet4_samples.split('\n')
+      const sampleList = removeEveryElement(data.cet4_samples.split('\n'))
       const phraseList = data.cet4_phrase.split('\n')
-      data.cet4_samples = mergeEveryNumber(sampleList, 3, true)
+      const translateList = data.cet4_translate.split('\n')
+      data.cet4_samples = mergeEveryNumber(sampleList, 2, false)
       data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
+      data.cet4_translate = translateList
       setWord(data)
       setNextWord(nextData)
-
       isExist(index)
     }
     getWord()
@@ -153,18 +155,31 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           </div>
         </div>
         <div className="detail-body">
-          <div className="translate">{word?.cet4_translate}</div>
+          <div className="translate">
+            {word?.cet4_translate.map((item: string, index: number) => {
+              return <p key={index}>{item}</p>
+            })}
+          </div>
           <div className="samples">
             <div className="content-tag">例句</div>
-            {word?.cet4_samples.map((item: any) => {
+            {word?.cet4_samples.map((item: any, index: number) => {
+              // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
+              const splitItems = item.replace(/[.?]/g, '\n').split('\n')
               return (
                 <div key={item} className="samples-item">
-                  <p>{item}</p>
+                  <p style={{ marginRight: '8px' }}>{index + 1}. </p>
+                  <div>
+                    {splitItems.map((splitItem: any, splitIndex: number) => (
+                      <p key={splitIndex}>
+                        {splitItem}
+                        {splitIndex === 0 ? '.' : null}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               )
             })}
           </div>
-
           <div className="phrase">
             <div className="content-tag">词组短语</div>
             <div className="phrase-list">

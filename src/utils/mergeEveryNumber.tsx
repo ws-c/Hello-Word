@@ -20,3 +20,7 @@ export function mergeEveryNumber(
 
   return mergedArr
 }
+
+export function removeEveryElement(arr: any[]) {
+  return arr.filter((_, index) => (index + 1) % 3 !== 0);
+}

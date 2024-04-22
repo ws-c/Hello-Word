@@ -1,9 +1,9 @@
 'use client'
-import './index.css'
+import '@/app/detail/[...id]/index.css'
 import useGetVoice from '@/hooks/useGetVoice'
 import { useSettingStore } from '@/store/useStore'
 import debounce from '@/utils/debounce'
-import { mergeEveryNumber } from '@/utils/mergeEveryNumber'
+import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import icon from '@/assets/trumpet.png'
@@ -61,10 +61,12 @@ export default function Page({ params }: { params: { word: string } }) {
     const getWord = async () => {
       try {
         const data = await fetchData(params.word)
-        const sampleList = data.cet4_samples.split('\n')
+        const sampleList = removeEveryElement(data.cet4_samples.split('\n'))
         const phraseList = data.cet4_phrase.split('\n')
-        data.cet4_samples = mergeEveryNumber(sampleList, 3, true)
+        const translateList = data.cet4_translate.split('\n')
+        data.cet4_samples = mergeEveryNumber(sampleList, 2, false)
         data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
+        data.cet4_translate = translateList
         setWord(data)
         setIndex(data.id)
         isExist(data.id)
@@ -120,13 +122,29 @@ export default function Page({ params }: { params: { word: string } }) {
               </div>
             </div>
             <div className="detail-body">
-              <div className="translate">{word?.cet4_translate}</div>
+              <div className="translate">
+                {word?.cet4_translate.map((item: string, index: number) => {
+                  return <p key={index}>{item}</p>
+                })}
+              </div>
               <div className="samples">
                 <div className="content-tag">例句</div>
-                {word?.cet4_samples.map((item: any) => {
+                {word?.cet4_samples.map((item: any, index: number) => {
+                  // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
+                  const splitItems = item.replace(/[.?]/g, '\n').split('\n')
                   return (
                     <div key={item} className="samples-item">
-                      <p>{item}</p>
+                      <p style={{ marginRight: '8px' }}>{index + 1}. </p>
+                      <div>
+                        {splitItems.map(
+                          (splitItem: any, splitIndex: number) => (
+                            <p key={splitIndex}>
+                              {splitItem}
+                              {splitIndex === 0 ? '.' : null}
+                            </p>
+                          )
+                        )}
+                      </div>
                     </div>
                   )
                 })}

@@ -18,10 +18,9 @@ export default function RootLayout({
       <body>
         <AntdRegistry>
           <TopBar></TopBar>
-
           <main
             style={{
-              paddingTop: '96px',
+              paddingTop: '80px',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
