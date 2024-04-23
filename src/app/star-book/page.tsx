@@ -128,7 +128,7 @@ export default function StarBook() {
       {!loading && ( // 根据 loading 状态来决定是否显示分页组件
         <Pagination
           onChange={onChange}
-          defaultPageSize={7}
+          defaultPageSize={8}
           defaultCurrent={1}
           total={total}
           hideOnSinglePage={true}

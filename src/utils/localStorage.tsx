@@ -33,7 +33,7 @@ export const setLocalTodayIndex = (TodayIndex: number) => {
 }
 export const getLocalGoal = () => {
   if (typeof window !== 'undefined') {
-    return parseInt(localStorage.getItem('goal') || '10')
+    return parseInt(localStorage.getItem('goal') || '20')
   }
 }
 export const setLocalGoal= (goal: number) => {

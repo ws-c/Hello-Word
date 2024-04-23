@@ -10,9 +10,9 @@ export async function GET(request: any) {
 
     // 执行 MySQL 查询
 
-    const idNum = (parseInt(currentPage) - 1) * 7
+    const idNum = (parseInt(currentPage) - 1) * 8
     const [rows, fields] = await connection.query(
-      `SELECT id,cet4_word,cet4_translate FROM cet4_starlist limit ${idNum},7`
+      `SELECT id,cet4_word,cet4_translate FROM cet4_starlist limit ${idNum},8`
     )
     // 释放连接回连接池
     connection.release()

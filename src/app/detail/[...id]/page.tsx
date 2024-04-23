@@ -21,8 +21,9 @@ import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
 import { useSettingStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
+import { notification } from 'antd'
 
-export default function Detail({ params }: { params: { id: string[] } }) {
+export default function Detail({ params }: { params: { id: string } }) {
   const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
   const { isMuted } = useSettingStore()
   const router = useRouter()
@@ -82,8 +83,6 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       data.cet4_translate = translateList.slice(0, 3)
       setWord(data)
       setNextWord(nextData)
-      console.log('2', nextData)
-      console.log('1', data)
       isExist(index)
     }
     getWord()
@@ -96,6 +95,10 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           router.push('/')
           setLocalIndex(getLocalIndex()! + getLocalTodayIndex()!)
           setLocalTodayIndex(0)
+          notification.success({
+            message: '成功',
+            description: '您已完成目标，请继续加油！',
+          });
           return
         }
         if (flag) {
@@ -129,13 +132,15 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       clearTimeout(timeoutId)
     }
   }, [onPlay])
-  useKeydown({ onPlay, word, setWordState, flag: params.id[1] })
+  useKeydown({ onPlay, word, setWordState, flag: params.id })
+
+  
   return (
     <>
       <div className="detail-container">
         <div className="detail-head">
           <div
-            className={params.id[1] === 'forget' ? 'forget-word word' : 'word'}
+            className={params.id === 'forget' ? 'forget-word word' : 'word'}
           >
             {word?.cet4_word}
           </div>
@@ -211,7 +216,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           </div>
         </div>
         <RightOutlined
-          onClick={() => setWordState(params.id[1] === 'know' ? true : false)}
+          onClick={() => setWordState(params.id === 'know' ? true : false)}
           className="RightOutlined"
         />
       </div>

@@ -68,10 +68,10 @@ export default function Word() {
       (flag: boolean) => {
         onPlay('1', word?.cet4_word!)
         if (flag) {
-          router.push(`/detail/${index}/know`)
+          router.push(`/detail/know`)
           setIsKnowActive(true)
         } else {
-          router.push(`/detail/${index}/forget`)
+          router.push(`/detail/forget`)
           setIsForgetActive(true)
         }
       },

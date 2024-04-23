@@ -21,7 +21,7 @@ export default function First() {
   const router = useRouter()
   const [count, setCount] = useState(1)
   const [countToday, setCountToday] = useState(1)
-  const [goal, setGoal] = useState(10)
+  const [goal, setGoal] = useState(20)
   useEffect(() => {
     if (localStorage.getItem('index') === null) {
       setLocalIndex(1)
@@ -31,13 +31,13 @@ export default function First() {
     }
     if (
       localStorage.getItem('goal') === null ||
-      +localStorage.getItem('goal')! < 10
+      +localStorage.getItem('goal')! < 20
     ) {
-      setLocalGoal(10)
+      setLocalGoal(20)
     }
     setCount(getLocalIndex()! || 1)
     setCountToday(getLocalTodayIndex()! || 1)
-    setGoal(getLocalGoal() || 10)
+    setGoal(getLocalGoal() || 20)
     const getWord = async () => {
       setWord(await fetchData(index!))
     }
@@ -70,7 +70,7 @@ export default function First() {
           <div className="new-box">
             <div>新学词</div>
             <InputNumber
-              min={10}
+              min={20}
               max={100}
               defaultValue={goal}
               onChange={onChange}
