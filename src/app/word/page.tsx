@@ -7,20 +7,21 @@ import useGetData from '../../hooks/useGetData'
 import useGetVoice from '../../hooks/useGetVoice'
 import useKeydown from '../../hooks/useKeydown'
 import { useCallback, useEffect, useState } from 'react'
-import { getLocalIndex, setLocalIndex } from '@/utils/localStorage'
+import {
+  getLocalGoal,
+  getLocalIndex,
+  getLocalTodayIndex
+} from '@/utils/localStorage'
 import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
 import type { word } from '@/types/word'
-import Prompt from '../prompt/page'
+import Prompt from '../../components/prompt/page'
 import { Statistic } from 'antd'
 import { useSettingStore } from '@/store/useStore'
 
 export default function Word() {
   const { isMuted } = useSettingStore()
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-    setCount(getLocalIndex() || 0)
-  })
+  const [countToday] = useState(getLocalTodayIndex() || 0)
   const router = useRouter()
   // 动态class
   const [isUSActive, setIsUSActive] = useState(false)
@@ -29,7 +30,9 @@ export default function Word() {
   const [isForgetActive, setIsForgetActive] = useState(false)
 
   // 获取单词
-  const [index, setIndex] = useState(getLocalIndex())
+  const [index, setIndex] = useState(
+    getLocalIndex()! + getLocalTodayIndex()! 
+  )
   const [word, setWord] = useState<word>()
   const { fetchData } = useGetData()
 
@@ -65,14 +68,8 @@ export default function Word() {
       (flag: boolean) => {
         onPlay('1', word?.cet4_word!)
         if (flag) {
-          // router.push(`/detail?id=${index}&type=know`)
           router.push(`/detail/${index}/know`)
           setIsKnowActive(true)
-          // 设置本地存储索引
-          setTimeout(() => {
-            setIndex(index! + 1)
-            setLocalIndex(index! + 1)
-          }, 500)
         } else {
           router.push(`/detail/${index}/forget`)
           setIsForgetActive(true)
@@ -140,8 +137,8 @@ export default function Word() {
       <Statistic
         className="word-statistic"
         title="已完成"
-        value={count}
-        suffix="/ 4,485"
+        value={countToday}
+        suffix={`/ ${getLocalGoal()}`}
       />
     </>
   )

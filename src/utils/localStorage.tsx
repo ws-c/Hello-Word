@@ -21,3 +21,23 @@ export const getLocalTheme = () => {
   }
 }
 
+export const getLocalTodayIndex = () => {
+  if (typeof window !== 'undefined') {
+    return parseInt(localStorage.getItem('TodayIndex') || '1')
+  }
+}
+export const setLocalTodayIndex = (TodayIndex: number) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('TodayIndex', '' + TodayIndex)
+  }
+}
+export const getLocalGoal = () => {
+  if (typeof window !== 'undefined') {
+    return parseInt(localStorage.getItem('goal') || '10')
+  }
+}
+export const setLocalGoal= (goal: number) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('goal', '' + goal)
+  }
+}

@@ -88,15 +88,15 @@
 }
 .word-statistic {
   position: absolute;
-  top: 8px;
-  left: 40px;
+  top: 2%;
+  left: 2%;
 }
 .ant-statistic-title {
   color: var(--text-color) !important;
 }
 .ant-statistic-content-value-int {
-  color: var(--ant-statistic-content-value);
+  color: var(--ant-statistic-content-value) !important;
 }
 .ant-statistic-content-suffix {
-  color: var(--text-color);
+  color: var(--text-color) !important;
 }

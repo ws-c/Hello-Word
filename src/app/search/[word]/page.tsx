@@ -120,13 +120,14 @@ export default function Page({ params }: { params: { word: string } }) {
                   />
                 )}
               </div>
-            </div>
-            <div className="detail-body">
               <div className="translate">
                 {word?.cet4_translate.map((item: string, index: number) => {
                   return <p key={index}>{item}</p>
                 })}
               </div>
+            </div>
+            <div className="detail-body">
+              
               <div className="samples">
                 <div className="content-tag">例句</div>
                 {word?.cet4_samples.map((item: any, index: number) => {

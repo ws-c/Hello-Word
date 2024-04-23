@@ -39,7 +39,8 @@
 }
 .star-audio {
   position: relative;
-  top: 4px;
+  top: 2px;
+  left: 4px;
 }
 .star-book-description {
   margin-top: 10px;

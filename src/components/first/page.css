@@ -1,0 +1,65 @@
+.plan-container {
+  width: 500px;
+  background-color: #767676;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--firstBG);
+}
+
+.plan-container h1 {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-size: 32px;
+  color: var(--text-color);
+}
+
+.plan-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.new-box {
+  width: 250px;
+  height: 100px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 32px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  background-color: var(--firstBG2);
+}
+
+.new-box > div:first-child {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+.start-btn {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #52c41a;
+}
+.total-statistic {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+}
+.today-statistic {
+  position: absolute;
+  top: 2%;
+  left: 17%;
+}
+.ant-statistic-title {
+  color: var(--text-color) !important;
+}
+.ant-statistic-content-value-int {
+  color: var(--ant-statistic-content-value) !important;
+}
+.ant-statistic-content-suffix {
+  color: var(--text-color) !important;
+}

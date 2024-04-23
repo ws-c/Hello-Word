@@ -1,4 +1,11 @@
-import Word from '../components/word/page'
+import Word from './word/page'
+import First from '@/components/first/first'
 export default function Home() {
-  return <Word></Word>
+  return (
+    <>
+      <First></First>
+
+      {/* <Word></Word> */}
+    </>
+  )
 }

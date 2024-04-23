@@ -64,7 +64,7 @@ export default function Page({ params }: { params: { id: string } }) {
   const setWordState = debounce(
     async (flag: boolean) => {
       if (flag) {
-        router.push(`/`)
+        router.push(`/word`)
         onPlay('1', nextWord)
       }
     },

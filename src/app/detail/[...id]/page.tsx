@@ -10,12 +10,17 @@ import useGetData from '@/hooks/useGetData'
 import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
-import { setLocalIndex } from '@/utils/localStorage'
+import {
+  getLocalGoal,
+  getLocalIndex,
+  getLocalTodayIndex,
+  setLocalIndex,
+  setLocalTodayIndex,
+} from '@/utils/localStorage'
 import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
 import { useSettingStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
-import WordCard from '@/components/wordCard/WordCard'
 
 export default function Detail({ params }: { params: { id: string[] } }) {
   const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
@@ -24,7 +29,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
   const [isUSActive, setIsUSActive] = useState(false)
   const [isUKActive, setIsUKActive] = useState(false)
   // 获取单词
-  const [index, setIndex] = useState(+params.id[0])
+  const [index, setIndex] = useState(getLocalIndex()! + getLocalTodayIndex()!)
   const [word, setWord] = useState<word_sample_filter>()
   const [nextWord, setNextWord] = useState<word_sample_filter>()
   const { fetchData } = useGetData()
@@ -72,11 +77,13 @@ export default function Detail({ params }: { params: { id: string[] } }) {
       const sampleList = removeEveryElement(data.cet4_samples.split('\n'))
       const phraseList = data.cet4_phrase.split('\n')
       const translateList = data.cet4_translate.split('\n')
-      data.cet4_samples = mergeEveryNumber(sampleList, 2, false)
-      data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
-      data.cet4_translate = translateList
+      data.cet4_samples = mergeEveryNumber(sampleList, 2, false).slice(0, 3)
+      data.cet4_phrase = mergeEveryNumber(phraseList, 2, false).slice(0, 3)
+      data.cet4_translate = translateList.slice(0, 3)
       setWord(data)
       setNextWord(nextData)
+      console.log('2', nextData)
+      console.log('1', data)
       isExist(index)
     }
     getWord()
@@ -85,11 +92,16 @@ export default function Detail({ params }: { params: { id: string[] } }) {
   const setWordState = useCallback(
     debounce(
       async (flag: boolean) => {
+        if (getLocalTodayIndex()! + 1 === getLocalGoal()) {
+          router.push('/')
+          setLocalIndex(getLocalIndex()! + getLocalTodayIndex()!)
+          setLocalTodayIndex(0)
+          return
+        }
         if (flag) {
-          router.push(`/`)
+          router.push(`/word`)
           // 设置本地存储索引
-          setIndex(index! + 1)
-          setLocalIndex(index! + 1)
+          setLocalTodayIndex(getLocalTodayIndex()! + 1)
           addTenWord()
           if (tenWord === 10) {
             router.push(`/ten/${index}`)
@@ -99,7 +111,7 @@ export default function Detail({ params }: { params: { id: string[] } }) {
           onPlay('1', nextWord?.cet4_word!)
         } else {
           onPlay('1', word?.cet4_word!)
-          router.push(`/`)
+          router.push(`/word`)
         }
       },
       300 // 设置延迟时间，以毫秒为单位
@@ -153,13 +165,13 @@ export default function Detail({ params }: { params: { id: string[] } }) {
               />
             )}
           </div>
-        </div>
-        <div className="detail-body">
           <div className="translate">
             {word?.cet4_translate.map((item: string, index: number) => {
               return <p key={index}>{item}</p>
             })}
           </div>
+        </div>
+        <div className="detail-body">
           <div className="samples">
             <div className="content-tag">例句</div>
             {word?.cet4_samples.map((item: any, index: number) => {
