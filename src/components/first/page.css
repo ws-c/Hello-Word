@@ -44,15 +44,12 @@
   align-items: center;
   background-color: #52c41a;
 }
-.total-statistic {
+.Statistic-container{
   position: absolute;
   top: 2%;
   left: 2%;
-}
-.today-statistic {
-  position: absolute;
-  top: 2%;
-  left: 17%;
+  display: flex;
+  gap: 20px;
 }
 .ant-statistic-title {
   color: var(--text-color) !important;

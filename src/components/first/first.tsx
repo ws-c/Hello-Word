@@ -17,12 +17,14 @@ import type { word } from '@/types/word'
 import useGetVoice from '@/hooks/useGetVoice'
 import { useSettingStore } from '@/store/useStore'
 import { useRouter } from 'next/navigation'
+import { v4 as uuidv4 } from 'uuid'
 export default function First() {
   const router = useRouter()
   const [count, setCount] = useState(1)
   const [countToday, setCountToday] = useState(1)
   const [goal, setGoal] = useState(20)
-  useEffect(() => {
+  // 初始化
+  const initLocalIndex = () => {
     if (localStorage.getItem('index') === null) {
       setLocalIndex(1)
     }
@@ -38,11 +40,18 @@ export default function First() {
     setCount(getLocalIndex()! || 1)
     setCountToday(getLocalTodayIndex()! || 1)
     setGoal(getLocalGoal() || 20)
-    const getWord = async () => {
-      setWord(await fetchData(index!))
+  }
+  // 用户注册
+  const register = () => {
+    let token = localStorage.getItem('user_token')
+    if (!token) {
+      // 如果 localStorage 中没有 token，则生成新的 token
+      const tokenKey = uuidv4().slice(0, 8) // 生成随机的 UUID
+      localStorage.setItem('user_token', tokenKey)
+      fetch(`/apis/register?id=${tokenKey}`)
     }
-    getWord()
-  }, [])
+  }
+
   // 获取单词
   const [index, setIndex] = useState(getLocalIndex()! + getLocalTodayIndex()!)
   const [word, setWord] = useState<word>()
@@ -62,6 +71,15 @@ export default function First() {
     },
     [getVoice, isMuted, router]
   )
+  // 首次渲染
+  useEffect(() => {
+    initLocalIndex()
+    const getWord = async () => {
+      setWord(await fetchData(index!))
+    }
+    getWord()
+    register()
+  }, [])
   return (
     <>
       <div className="plan-container">
@@ -87,18 +105,20 @@ export default function First() {
           </Link>
         </div>
       </div>
-      <Statistic
-        className="total-statistic"
-        title="总进度"
-        value={count === 1 ? 0 : count}
-        suffix="/ 4485"
-      />
-      <Statistic
-        className="today-statistic"
-        title="今日完成"
-        value={countToday - 1}
-        suffix={`/ ${goal}`}
-      />
+      <div className="Statistic-container">
+        <Statistic
+          className="total-statistic"
+          title="总进度"
+          value={count === 1 ? 0 : count}
+          suffix="/ 4485"
+        />
+        <Statistic
+          className="today-statistic"
+          title="今日完成"
+          value={countToday - 1}
+          suffix={`/ ${goal}`}
+        />
+      </div>
       {/* <Word></Word> */}
     </>
   )
