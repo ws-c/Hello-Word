@@ -1,7 +1,7 @@
 'use client'
 import '@/app/detail/[...id]/index.css'
 import useGetVoice from '@/hooks/useGetVoice'
-import { useSettingStore } from '@/store/useStore'
+import { useSettingStore, useUserStore } from '@/store/useStore'
 import debounce from '@/utils/debounce'
 import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import { useCallback, useEffect, useState } from 'react'
@@ -14,6 +14,7 @@ import Link from 'next/link'
 import style from './search.module.css'
 
 export default function Page({ params }: { params: { word: string } }) {
+  const { USER_TOKEN } = useUserStore()
   const [isError, setIsError] = useState(false)
   const { isMuted } = useSettingStore()
   const [isUSActive, setIsUSActive] = useState(false)
@@ -27,13 +28,13 @@ export default function Page({ params }: { params: { word: string } }) {
   const setStar = (flag: boolean, index: number) => {
     setIsStar(flag)
     if (flag) {
-      fetch(`/apis/setStar?id=${index}`)
+      fetch(`/apis/setStar?id=${index}&token=${USER_TOKEN}`)
     } else {
-      fetch(`/apis/delStar?id=${index}`)
+      fetch(`/apis/delStar?id=${index}&token=${USER_TOKEN}`)
     }
   }
   const isExist = useCallback(async (id: number) => {
-    const res = await fetch(`/apis/isStar?id=${id}`)
+    const res = await fetch(`/apis/isStar?id=${id}&token=${USER_TOKEN}`)
     const { data } = await res.json()
     if (data && data[0].count > 0) {
       setIsStar(true)
@@ -127,7 +128,6 @@ export default function Page({ params }: { params: { word: string } }) {
               </div>
             </div>
             <div className="detail-body">
-              
               <div className="samples">
                 <div className="content-tag">例句</div>
                 {word?.cet4_samples.map((item: any, index: number) => {

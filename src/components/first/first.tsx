@@ -3,9 +3,11 @@ import {
   getLocalGoal,
   getLocalIndex,
   getLocalTodayIndex,
+  getUserToken,
   setLocalGoal,
   setLocalIndex,
   setLocalTodayIndex,
+  setUserToken,
 } from '@/utils/localStorage'
 import './page.css'
 import { InputNumber, Statistic } from 'antd'
@@ -43,11 +45,11 @@ export default function First() {
   }
   // 用户注册
   const register = () => {
-    let token = localStorage.getItem('user_token')
+    let token = getUserToken()
     if (!token) {
       // 如果 localStorage 中没有 token，则生成新的 token
       const tokenKey = uuidv4().slice(0, 8) // 生成随机的 UUID
-      localStorage.setItem('user_token', tokenKey)
+      setUserToken(tokenKey)
       fetch(`/apis/register?id=${tokenKey}`)
     }
   }

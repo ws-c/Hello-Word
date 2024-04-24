@@ -2,7 +2,7 @@
 import useGetStarList from '@/hooks/useGetStarList'
 import './index.css'
 import { word } from '@/types/word'
-import { List, Pagination, Spin } from 'antd' // 引入 Spin 组件来显示加载状态
+import { List, Pagination, Spin } from 'antd'
 import { useCallback, useEffect, useState } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
 import Link from 'next/link'
@@ -10,15 +10,16 @@ import icon from '@/assets/trumpet.png'
 import Image from 'next/image'
 import useGetVoice from '@/hooks/useGetVoice'
 import debounce from '@/utils/debounce'
-import { useSettingStore } from '@/store/useStore'
+import { useSettingStore, useUserStore } from '@/store/useStore'
 
 export default function StarBook() {
+  const { USER_TOKEN } = useUserStore()
   const { isMuted } = useSettingStore()
   const [wordList, setWordList] = useState<word[]>()
   const { fetchStarList } = useGetStarList()
   const [currentPage, setCurrentPage] = useState(1)
   const [total, setTotal] = useState(0)
-  const [loading, setLoading] = useState(true) // 添加 loading 状态
+  const [loading, setLoading] = useState(true)
   // 获取音频
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const { getVoice } = useGetVoice()
@@ -32,8 +33,11 @@ export default function StarBook() {
   )
   // 获取收藏单词总数
   const getSun = async () => {
-    const response = await fetch(`/apis/starList/getStarListSum`)
+    const response = await fetch(
+      `/apis/starList/getStarListSum?token=${USER_TOKEN}`
+    )
     const res = await response.json()
+
     setTotal(res.data[0].count)
   }
 
@@ -59,7 +63,7 @@ export default function StarBook() {
 
   // 删除单项数据
   const deleteItem = (id: number) => {
-    fetch(`/apis/delStar?id=${id}`)
+    fetch(`/apis/delStar?id=${id}&token=${USER_TOKEN}`)
     getWordList()
     getSun()
   }

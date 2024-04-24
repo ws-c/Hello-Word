@@ -19,11 +19,12 @@ import {
 } from '@/utils/localStorage'
 import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
-import { useSettingStore } from '@/store/useStore'
+import { useSettingStore, useUserStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
 import { notification } from 'antd'
 
 export default function Detail({ params }: { params: { id: string } }) {
+  const { USER_TOKEN } = useUserStore()
   const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
   const { isMuted } = useSettingStore()
   const router = useRouter()
@@ -39,13 +40,13 @@ export default function Detail({ params }: { params: { id: string } }) {
   const setStar = (flag: boolean, index: number) => {
     setIsStar(flag)
     if (flag) {
-      fetch(`/apis/setStar?id=${index}`)
+      fetch(`/apis/setStar?id=${index}&token=${USER_TOKEN}`)
     } else {
-      fetch(`/apis/delStar?id=${index}`)
+      fetch(`/apis/delStar?id=${index}&token=${USER_TOKEN}`)
     }
   }
   const isExist = useCallback(async (id: number) => {
-    const res = await fetch(`/apis/isStar?id=${id}`)
+    const res = await fetch(`/apis/isStar?id=${id}&token=${USER_TOKEN}`)
     const { data } = await res.json()
     if (data && data[0].count > 0) {
       setIsStar(true)
@@ -98,7 +99,8 @@ export default function Detail({ params }: { params: { id: string } }) {
           notification.success({
             message: '成功',
             description: '您已完成目标，请继续加油！',
-          });
+            duration: 2,
+          })
           return
         }
         if (flag) {
@@ -134,14 +136,11 @@ export default function Detail({ params }: { params: { id: string } }) {
   }, [onPlay])
   useKeydown({ onPlay, word, setWordState, flag: params.id })
 
-  
   return (
     <>
       <div className="detail-container">
         <div className="detail-head">
-          <div
-            className={params.id === 'forget' ? 'forget-word word' : 'word'}
-          >
+          <div className={params.id === 'forget' ? 'forget-word word' : 'word'}>
             {word?.cet4_word}
           </div>
           <div className="soundmark">

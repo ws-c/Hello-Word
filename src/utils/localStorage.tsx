@@ -41,3 +41,14 @@ export const setLocalGoal= (goal: number) => {
     localStorage.setItem('goal', '' + goal)
   }
 }
+
+export const getUserToken = () => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('user_token') || ''
+  }
+}
+export const setUserToken = (token: string) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('user_token', token)
+  }
+}

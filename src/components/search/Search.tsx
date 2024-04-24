@@ -15,7 +15,6 @@ const Search: React.FC<ChildProps> = ({ onCloseSearch }) => {
   }
   const handleSubmit = (event: { preventDefault: () => void }) => {
     event.preventDefault() // 阻止表单默认提交行为
-    console.log(searchText.trim())
     router.push(`/search/${searchText.trim()}`)
     onCloseSearch()
   }
@@ -25,7 +24,6 @@ const Search: React.FC<ChildProps> = ({ onCloseSearch }) => {
   }
   const handleSearch = (event: any) => {
     event.stopPropagation()
-    console.log(searchText.trim())
     router.push(`/search/${searchText.trim()}`)
     onCloseSearch()
   }
