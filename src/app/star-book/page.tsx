@@ -32,18 +32,18 @@ export default function StarBook() {
     [getVoice]
   )
   // 获取收藏单词总数
-  const getSun = async () => {
+  const getSun = useCallback(async () => {
     const response = await fetch(
       `/apis/starList/getStarListSum?token=${USER_TOKEN}`
     )
     const res = await response.json()
 
     setTotal(res.data[0].count)
-  }
+  }, [USER_TOKEN])
 
   useEffect(() => {
     getSun()
-  }, [])
+  }, [getSun])
 
   // 获取收藏单词列表
   const getWordList = useCallback(async () => {
