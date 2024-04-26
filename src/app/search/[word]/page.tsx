@@ -54,7 +54,7 @@ export default function Page({ params }: { params: { word: string } }) {
           setIsUSActive(true)
         }
       },
-      300 // 设置延迟时间，以毫秒为单位
+      500 // 设置延迟时间，以毫秒为单位
     ),
     [getVoice]
   )
@@ -82,7 +82,7 @@ export default function Page({ params }: { params: { word: string } }) {
     const timeoutId = setTimeout(() => {
       setIsUKActive(false)
       setIsUSActive(false)
-    }, 300)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)

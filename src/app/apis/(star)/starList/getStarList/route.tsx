@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import pool from '@/db/mysql'
+import { revalidatePath } from 'next/cache'
 
 export async function GET(request: any) {
   const searchParams = request.nextUrl.searchParams
@@ -19,7 +20,7 @@ export async function GET(request: any) {
     )
     // 释放连接回连接池
     connection.release()
-
+    revalidatePath('/star-book')
     return NextResponse.json({ data: rows }, { status: 200 })
   } catch (error) {
     console.error('Error:', error)

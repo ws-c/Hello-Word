@@ -65,7 +65,7 @@ export default function Detail({ params }: { params: { id: string } }) {
           setIsUSActive(true)
         }
       },
-      300 // 设置延迟时间，以毫秒为单位
+      500 // 设置延迟时间，以毫秒为单位
     ),
     [getVoice]
   )
@@ -119,7 +119,7 @@ export default function Detail({ params }: { params: { id: string } }) {
           router.push(`/word`)
         }
       },
-      300 // 设置延迟时间，以毫秒为单位
+      500 // 设置延迟时间，以毫秒为单位
     ),
     [index, onPlay]
   )
@@ -128,7 +128,7 @@ export default function Detail({ params }: { params: { id: string } }) {
     const timeoutId = setTimeout(() => {
       setIsUKActive(false)
       setIsUSActive(false)
-    }, 300)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)

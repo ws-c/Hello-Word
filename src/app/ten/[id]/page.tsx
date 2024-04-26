@@ -31,7 +31,7 @@ export default function Page({ params }: { params: { id: string } }) {
       setActiveIndex(index)
       if (isMuted) return
       getVoice(type, audio)
-    }, 300),
+    }, 500),
     [getVoice]
   )
   // 获取十个单词列表
@@ -54,7 +54,7 @@ export default function Page({ params }: { params: { id: string } }) {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setActiveIndex(null)
-    }, 300)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)
@@ -68,7 +68,7 @@ export default function Page({ params }: { params: { id: string } }) {
         onPlay('1', nextWord)
       }
     },
-    300 // 设置延迟时间，以毫秒为单位
+    500 // 设置延迟时间，以毫秒为单位
   )
   // 遮蔽单词
   const [activeDesc, setActiveDesc] = useState<number[]>([]) // 修改为数组来存储多个单词的状态

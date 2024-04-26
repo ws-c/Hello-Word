@@ -17,7 +17,6 @@ export async function GET(request: any) {
 
     // 释放连接回连接池
     connection.release()
-
     return NextResponse.json({ data: rows }, { status: 200 })
   } catch (error) {
     console.error('Error:', error)

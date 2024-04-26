@@ -28,7 +28,7 @@ export default function StarBook() {
       setActiveIndex(index)
       if (isMuted) return
       getVoice(type, audio)
-    }, 300),
+    }, 500),
     [getVoice]
   )
   // 获取收藏单词总数
@@ -71,7 +71,7 @@ export default function StarBook() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setActiveIndex(null)
-    }, 300)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)

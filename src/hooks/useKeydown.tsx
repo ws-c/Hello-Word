@@ -42,7 +42,7 @@ export default function useKeydown({
           }
         }
       }
-    }, 300)
+    }, 500)
     // 添加键盘事件监听器
     window.addEventListener('keydown', handleKeyDown)
     // 在组件卸载时移除事件监听器

@@ -49,7 +49,7 @@ export default function Word() {
           setIsUSActive(true)
         }
       },
-      300 // 设置延迟时间，以毫秒为单位
+      500 // 设置延迟时间，以毫秒为单位
     ),
     [getVoice]
   )
@@ -75,7 +75,7 @@ export default function Word() {
           setIsForgetActive(true)
         }
       },
-      300 // 设置延迟时间，以毫秒为单位
+      500 // 设置延迟时间，以毫秒为单位
     ),
     [index, onPlay]
   )
@@ -87,7 +87,7 @@ export default function Word() {
       setIsForgetActive(false)
       setIsUKActive(false)
       setIsUSActive(false)
-    }, 300)
+    }, 500)
 
     return () => {
       clearTimeout(timeoutId)
