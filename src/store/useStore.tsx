@@ -1,6 +1,5 @@
-import { getUserToken } from '@/utils/localStorage'
+import { getLocalTheme, getUserToken } from '@/utils/localStorage'
 import { create } from 'zustand'
-
 
 type SettingStore = {
   isMuted: boolean
@@ -15,7 +14,13 @@ type TenWordStore = {
 type UserStore = {
   USER_TOKEN: string
 }
-
+type CardStore = {
+  CardNumber: string
+}
+type ThemeStore = {
+  Theme: string
+  setTheme: () => void
+}
 
 // 静音设置
 export const useSettingStore = create<SettingStore>((set) => ({
@@ -33,4 +38,16 @@ export const useTenWordStore = create<TenWordStore>((set) => ({
 // USER_TOKEN
 export const useUserStore = create<UserStore>((set) => ({
   USER_TOKEN: getUserToken()!,
+}))
+
+// 打卡
+export const useCardStore = create<CardStore>((set) => ({
+  CardNumber: getUserToken()!,
+}))
+
+// 双色模式
+export const useThemeStore = create<ThemeStore>((set) => ({
+  Theme: getLocalTheme()!,
+  setTheme: () =>
+    set((state) => ({ Theme: state.Theme === 'light' ? 'dark' : 'light' })),
 }))

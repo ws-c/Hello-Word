@@ -15,8 +15,7 @@ import { useRouter } from 'next/navigation'
 import useGetData from '@/hooks/useGetData'
 import useKeydown from '@/hooks/useKeydown'
 export default function Page({ params }: { params: { id: string } }) {
-  const { fetchData } = useGetData()
-  const [nextWord, setNextWord] = useState<string>('')
+  const { word: nextWord } = useGetData(+params.id + 1)
   const router = useRouter()
   useEffect(() => {})
   const { getTenWordList } = useGetTenWord()
@@ -42,13 +41,8 @@ export default function Page({ params }: { params: { id: string } }) {
       setWordList(res)
       setLoading(false)
     }
-    const getNextWord = async () => {
-      const nextData = await fetchData(+params.id + 1)
-      setNextWord(nextData.cet4_word)
-    }
     setTenWord()
-    getNextWord()
-  }, [fetchData, getTenWordList, params.id])
+  }, [getTenWordList, params.id])
 
   // 触发显示效果
   useEffect(() => {
@@ -65,7 +59,7 @@ export default function Page({ params }: { params: { id: string } }) {
     async (flag: boolean) => {
       if (flag) {
         router.push(`/word`)
-        onPlay('1', nextWord)
+        onPlay('1', nextWord?.cet4_word)
       }
     },
     500 // 设置延迟时间，以毫秒为单位

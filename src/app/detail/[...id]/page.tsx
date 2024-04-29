@@ -11,17 +11,21 @@ import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
 import {
+  getCardNumber,
   getLocalGoal,
   getLocalIndex,
   getLocalTodayIndex,
+  setCardNumber,
   setLocalIndex,
   setLocalTodayIndex,
 } from '@/utils/localStorage'
 import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
 import Prompt from '@/components/prompt/page'
-import { useSettingStore, useUserStore } from '@/store/useStore'
+import { useCardStore, useSettingStore, useUserStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
-import { notification } from 'antd'
+import { Divider, Spin, notification } from 'antd'
+import useGetFilterData from '@/hooks/useGetFilterData'
+import isSameDay from '@/utils/isSameDay'
 
 export default function Detail({ params }: { params: { id: string } }) {
   const { USER_TOKEN } = useUserStore()
@@ -32,9 +36,8 @@ export default function Detail({ params }: { params: { id: string } }) {
   const [isUKActive, setIsUKActive] = useState(false)
   // 获取单词
   const [index, setIndex] = useState(getLocalIndex()! + getLocalTodayIndex()!)
-  const [word, setWord] = useState<word_sample_filter>()
-  const [nextWord, setNextWord] = useState<word_sample_filter>()
-  const { fetchData } = useGetData()
+  const { word } = useGetFilterData(index)
+  const { word: nextWord } = useGetData(index + 1)
   // 收藏单词
   const [isStar, setIsStar] = useState(false)
   const setStar = (flag: boolean, index: number) => {
@@ -74,20 +77,10 @@ export default function Detail({ params }: { params: { id: string } }) {
       if (localStorage.getItem('index') === null) {
         setIndex(1)
       }
-      const data = await fetchData(index)
-      const nextData = await fetchData(index + 1)
-      const sampleList = removeEveryElement(data.cet4_samples.split('\n'))
-      const phraseList = data.cet4_phrase.split('\n')
-      const translateList = data.cet4_translate.split('\n')
-      data.cet4_samples = mergeEveryNumber(sampleList, 2, false).slice(0, 3)
-      data.cet4_phrase = mergeEveryNumber(phraseList, 2, false).slice(0, 3)
-      data.cet4_translate = translateList.slice(0, 3)
-      setWord(data)
-      setNextWord(nextData)
       isExist(index)
     }
     getWord()
-  }, [fetchData, index, isExist])
+  }, [index, isExist, word])
   //设置认识或不认识
   const setWordState = useCallback(
     debounce(
@@ -96,6 +89,25 @@ export default function Detail({ params }: { params: { id: string } }) {
           router.push('/')
           setLocalIndex(getLocalIndex()! + getLocalTodayIndex()!)
           setLocalTodayIndex(0)
+
+          // 获取卡片信息
+          const card = getCardNumber()
+
+          // 如果卡片信息不存在，则创建一个新的卡片
+          if (!card) {
+            const today = new Date()
+            const newCard = { cardNum: 1, date: today }
+            setCardNumber(newCard)
+          } else {
+            const today = new Date()
+            const parsedCardDate = new Date(card.date)
+
+            // 检查是否是同一天
+            if (!isSameDay(today, parsedCardDate)) {
+              const newCard = { cardNum: card.cardNum + 1, date: today }
+              setCardNumber(newCard)
+            }
+          }
           notification.success({
             message: '成功',
             description: '您已完成目标，请继续加油！',

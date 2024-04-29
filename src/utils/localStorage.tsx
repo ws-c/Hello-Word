@@ -36,7 +36,7 @@ export const getLocalGoal = () => {
     return parseInt(localStorage.getItem('goal') || '20')
   }
 }
-export const setLocalGoal= (goal: number) => {
+export const setLocalGoal = (goal: number) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('goal', '' + goal)
   }
@@ -50,5 +50,21 @@ export const getUserToken = () => {
 export const setUserToken = (token: string) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('user_token', token)
+  }
+}
+export const getCardNumber = () => {
+  if (typeof window !== 'undefined') {
+    const cardString = localStorage.getItem('CardNumber')
+    if (cardString) {
+      return JSON.parse(cardString)
+    } else {
+      return null
+    }
+  }
+}
+export const setCardNumber = (Card: { cardNum: number; date: Date }) => {
+  if (typeof window !== 'undefined') {
+    const cardString = JSON.stringify(Card)
+    localStorage.setItem('CardNumber', cardString)
   }
 }

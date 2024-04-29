@@ -39,6 +39,7 @@ a {
   --ant-pagination-item-a: rgba(0, 0, 0, 0.88);
   --ant-list-item-even: rgba(249, 249, 249, 0.5);
   --hideDescription: #999999;
+  --ant-progress-inner: #EBEBEB;
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
@@ -64,6 +65,7 @@ html[data-theme='dark'] {
   --ant-pagination-item-a: rgba(255, 255, 255, 0.88);
   --ant-list-item-even: #26262c83;
   --hideDescription: #99999930;
+  --ant-progress-inner: #2B2B2B;
 }
 html {
   width: 100%;

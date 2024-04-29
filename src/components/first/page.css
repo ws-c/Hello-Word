@@ -1,3 +1,46 @@
+.first-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+.first-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.first-top .card {
+  font-size: 80px;
+  color: var(--text-color);
+  font-weight: 600;
+}
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.font-container {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.calendar {
+  color: red !important;
+}
+.plan-header span {
+  color: var(--text-color2);
+}
+.plan-header_left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.plan-body {
+  margin-top: 20px;
+}
+.plan-body .percent {
+  color: var(--text-color);
+}
 .plan-container {
   width: 500px;
   background-color: #767676;
@@ -10,7 +53,7 @@
 .plan-container h1 {
   margin-left: 10px;
   margin-bottom: 20px;
-  font-size: 32px;
+  font-size: 28px;
   color: var(--text-color);
 }
 
@@ -64,3 +107,7 @@
 .ant-input-number {
   border-radius: 32px !important;
 }
+.ant-progress-inner {
+  background-color: var(--ant-progress-inner) !important;
+}
+

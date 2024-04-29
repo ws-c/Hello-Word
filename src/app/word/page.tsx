@@ -10,13 +10,12 @@ import { useCallback, useEffect, useState } from 'react'
 import {
   getLocalGoal,
   getLocalIndex,
-  getLocalTodayIndex
+  getLocalTodayIndex,
 } from '@/utils/localStorage'
 import debounce from '../../utils/debounce'
 import { useRouter } from 'next/navigation'
-import type { word } from '@/types/word'
 import Prompt from '../../components/prompt/page'
-import { Statistic } from 'antd'
+import { Spin, Statistic } from 'antd'
 import { useSettingStore } from '@/store/useStore'
 
 export default function Word() {
@@ -30,11 +29,8 @@ export default function Word() {
   const [isForgetActive, setIsForgetActive] = useState(false)
 
   // 获取单词
-  const [index, setIndex] = useState(
-    getLocalIndex()! + getLocalTodayIndex()! 
-  )
-  const [word, setWord] = useState<word>()
-  const { fetchData } = useGetData()
+  const [index, setIndex] = useState(getLocalIndex()! + getLocalTodayIndex()!)
+  const { word, loading } = useGetData(index)
 
   // 获取音频
   const { getVoice } = useGetVoice()
@@ -54,14 +50,10 @@ export default function Word() {
     [getVoice]
   )
   useEffect(() => {
-    const getWord = async () => {
-      if (localStorage.getItem('index') === null) {
-        setIndex(1)
-      }
-      setWord(await fetchData(index!))
+    if (localStorage.getItem('index') === null) {
+      setIndex(1)
     }
-    getWord()
-  }, [fetchData, index])
+  }, [index])
   // 设置认识或不认识
   const setWordState = useCallback(
     debounce(
@@ -100,8 +92,14 @@ export default function Word() {
     <>
       <div className="word-container">
         <div className="head">
-          <span>{word?.cet4_word}</span>
-          <div>{word?.cet4_phonetic}</div>
+          {loading ? (
+            <Spin size="large" />
+          ) : (
+            <>
+              <span>{word?.cet4_word}</span>
+              <div>{word?.cet4_phonetic}</div>
+            </>
+          )}
           <div className="icon-container">
             <Image
               onClick={() => onPlay('1', word?.cet4_word!)}
