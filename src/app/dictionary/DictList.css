@@ -1,0 +1,53 @@
+.DictList-container {
+  padding: 8px;
+  width: 100%;
+  height: 850px;
+  overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.DictList-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* 垂直居中对齐 */
+  padding: 10px; /* 添加内边距 */
+  border-bottom: 1px solid #ccc; /* 添加底部边框 */
+}
+
+.DictList-item-container:last-child {
+  border-bottom: none; /* 最后一个列表项去除底部边框 */
+}
+.DictList-item-container:hover {
+  background-color: var(--list-item-hover); /* 悬停时的背景颜色 */
+  box-shadow: 0 0 5px var(--contentBgShadow); /* 添加悬停时的阴影效果 */
+}
+.word-id {
+  display: inline-block;
+  font-weight: bold; /* 加粗字体 */
+  margin-right: 10px; /* 添加右边距 */
+}
+.word {
+  font-size: 20px;
+}
+.DictList-item-container .right {
+  padding-right: 8px;
+  color: var(--text-color2);
+}
+/* 定义滚动条的宽度和颜色 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* 定义滚动条的轨道颜色 */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* 定义滚动条的滑块颜色 */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* 定义滚动条的滑块悬停时的颜色 */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

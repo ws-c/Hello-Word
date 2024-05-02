@@ -4,7 +4,9 @@
   margin: 0;
 }
 a {
-  text-decoration: none;
+  text-decoration: none ; /* 取消下划线 */
+  color: inherit; /* 继承父元素的颜色 */
+  cursor: pointer; /* 鼠标指针形状 */
 }
 @media screen and (max-width: 850px) {
   .logo {
@@ -25,7 +27,7 @@ a {
   --background-color3: #f5f5f5;
   --firstBG: #fafafa;
   --firstBG2: #f5f5f5;
-  --colorBgElevated: #f3f3f3;
+  --colorBgElevated: #ffffff;
   --contentBg: #fafafa;
   --contentBgShadow: rgba(0, 0, 0, 0.08);
   --contentBgShadow2: rgba(0, 0, 0, 0.05);
@@ -39,7 +41,8 @@ a {
   --ant-pagination-item-a: rgba(0, 0, 0, 0.88);
   --ant-list-item-even: rgba(249, 249, 249, 0.5);
   --hideDescription: #999999;
-  --ant-progress-inner: #EBEBEB;
+  --ant-progress-inner: #ebebeb;
+  --list-item-hover: #f0f0f0;
 }
 html[data-theme='dark'] {
   --primary-color: #f5deb3;
@@ -65,7 +68,8 @@ html[data-theme='dark'] {
   --ant-pagination-item-a: rgba(255, 255, 255, 0.88);
   --ant-list-item-even: #26262c83;
   --hideDescription: #99999930;
-  --ant-progress-inner: #2B2B2B;
+  --ant-progress-inner: #2b2b2b;
+  --list-item-hover: #2c2c2c;
 }
 html {
   width: 100%;

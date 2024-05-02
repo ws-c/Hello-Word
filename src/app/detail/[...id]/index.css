@@ -67,6 +67,7 @@
   min-width: 100px;
 }
 .detail-body {
+  min-width: 800px;
   position: relative;
   display: flex;
   justify-content: center;

@@ -23,6 +23,7 @@
   display: flex;
   align-items: center;
   gap: 2px;
+  cursor: pointer;
 }
 .calendar {
   color: red !important;
@@ -110,4 +111,3 @@
 .ant-progress-inner {
   background-color: var(--ant-progress-inner) !important;
 }
-

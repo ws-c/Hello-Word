@@ -90,6 +90,11 @@ export default function First() {
     register()
     setCard(getCardNumber() || 0)
   }, [])
+  // 跳转到词表页面
+  const toDictionary = () => {
+    router.push('/dictionary')
+  }
+
   return (
     <>
       <div className="first-container">
@@ -111,7 +116,7 @@ export default function First() {
             <div className="plan-header_left">
               <h3>英语四级乱序词汇 </h3> <span>&gt;</span>
             </div>
-            <div className="font-container">
+            <div className="font-container" onClick={toDictionary}>
               <Image
                 src={Theme === 'dark' ? darkDictionary : dictionary}
                 alt="dictionary"

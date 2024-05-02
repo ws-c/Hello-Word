@@ -93,7 +93,7 @@ export default function Word() {
       <div className="word-container">
         <div className="head">
           {loading ? (
-            <Spin size="large" />
+            <Spin size="large" style={{ marginBottom: '40px' }} />
           ) : (
             <>
               <span>{word?.cet4_word}</span>

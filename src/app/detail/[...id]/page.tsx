@@ -7,7 +7,6 @@ import { useCallback, useEffect, useState } from 'react'
 import useGetVoice from '@/hooks/useGetVoice'
 import debounce from '@/utils/debounce'
 import useGetData from '@/hooks/useGetData'
-import type { word_sample_filter } from '@/types/word'
 import useKeydown from '@/hooks/useKeydown'
 import { useRouter } from 'next/navigation'
 import {
@@ -19,11 +18,11 @@ import {
   setLocalIndex,
   setLocalTodayIndex,
 } from '@/utils/localStorage'
-import { mergeEveryNumber, removeEveryElement } from '@/utils/mergeEveryNumber'
+
 import Prompt from '@/components/prompt/page'
-import { useCardStore, useSettingStore, useUserStore } from '@/store/useStore'
+import { useSettingStore, useUserStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
-import { Divider, Spin, notification } from 'antd'
+import { Skeleton, notification } from 'antd'
 import useGetFilterData from '@/hooks/useGetFilterData'
 import isSameDay from '@/utils/isSameDay'
 
@@ -36,7 +35,7 @@ export default function Detail({ params }: { params: { id: string } }) {
   const [isUKActive, setIsUKActive] = useState(false)
   // 获取单词
   const [index, setIndex] = useState(getLocalIndex()! + getLocalTodayIndex()!)
-  const { word } = useGetFilterData(index)
+  const { word, loading } = useGetFilterData(index)
   const { word: nextWord } = useGetData(index + 1)
   // 收藏单词
   const [isStar, setIsStar] = useState(false)
@@ -151,81 +150,120 @@ export default function Detail({ params }: { params: { id: string } }) {
   return (
     <>
       <div className="detail-container">
-        <div className="detail-head">
-          <div className={params.id === 'forget' ? 'forget-word word' : 'word'}>
-            {word?.cet4_word}
+        {loading ? (
+          <>
+            <Skeleton
+              active
+              loading={loading}
+              title={{ width: '20%' }}
+              paragraph={{ rows: 3, width: ['300px', '300px', '300px'] }}
+              style={{ marginBottom: '60px' }}
+            />
+          </>
+        ) : (
+          <div className="detail-head">
+            <div
+              className={params.id === 'forget' ? 'forget-word word' : 'word'}
+            >
+              {word?.cet4_word}
+            </div>
+            <div className="soundmark">
+              <span>{word?.cet4_phonetic}</span>
+              <Image
+                onClick={() => onPlay('1', word?.cet4_word!)}
+                src={icon}
+                alt="trumpet"
+                className={isUKActive ? 'audio-active audio' : 'audio'}
+              ></Image>
+              <Image
+                onClick={() => onPlay('0', word?.cet4_word!)}
+                src={icon}
+                alt="trumpet"
+                className={isUSActive ? 'audio-active audio' : 'audio'}
+              ></Image>
+              {isStar === false ? (
+                <StarOutlined
+                  className="StarOutlined"
+                  onClick={() => setStar(true, index)}
+                />
+              ) : (
+                <StarFilled
+                  className="StarFilled"
+                  onClick={() => setStar(false, index)}
+                />
+              )}
+            </div>
+            <div className="translate">
+              {word?.cet4_translate.map((item: string, index: number) => {
+                return <p key={index}>{item}</p>
+              })}
+            </div>
           </div>
-          <div className="soundmark">
-            <span>{word?.cet4_phonetic}</span>
-            <Image
-              onClick={() => onPlay('1', word?.cet4_word!)}
-              src={icon}
-              alt="trumpet"
-              className={isUKActive ? 'audio-active audio' : 'audio'}
-            ></Image>
-            <Image
-              onClick={() => onPlay('0', word?.cet4_word!)}
-              src={icon}
-              alt="trumpet"
-              className={isUSActive ? 'audio-active audio' : 'audio'}
-            ></Image>
-            {isStar === false ? (
-              <StarOutlined
-                className="StarOutlined"
-                onClick={() => setStar(true, index)}
-              />
-            ) : (
-              <StarFilled
-                className="StarFilled"
-                onClick={() => setStar(false, index)}
-              />
-            )}
-          </div>
-          <div className="translate">
-            {word?.cet4_translate.map((item: string, index: number) => {
-              return <p key={index}>{item}</p>
-            })}
-          </div>
-        </div>
-        <div className="detail-body">
-          <div className="samples">
-            <div className="content-tag">例句</div>
-            {word?.cet4_samples.map((item: any, index: number) => {
-              // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
-              const splitItems = item.replace(/[.?]/g, '\n').split('\n')
-              return (
-                <div key={item} className="samples-item">
-                  <p style={{ marginRight: '8px' }}>{index + 1}. </p>
-                  <div>
-                    {splitItems.map((splitItem: any, splitIndex: number) => (
-                      <p key={splitIndex}>
-                        {splitItem}
-                        {splitIndex === 0 ? '.' : null}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-          <div className="phrase">
-            <div className="content-tag">词组短语</div>
-            <div className="phrase-list">
-              {word?.cet4_phrase.map((item: any) => {
+        )}
+        {loading ? (
+          <>
+            <Skeleton
+              active
+              loading={loading}
+              title={{ width: '10%' }}
+              paragraph={{ rows: 4, width: '600px' }}
+              style={{ marginBottom: '40px' }}
+            />
+            <Skeleton
+              active
+              loading={loading}
+              title={{ width: '10%' }}
+              paragraph={{ rows: 3, width: '600px' }}
+              style={{ marginBottom: '40px' }}
+            />
+            <Skeleton
+              active
+              loading={loading}
+              title={{ width: '10%' }}
+              paragraph={{ rows: 2, width: '600px' }}
+            />
+          </>
+        ) : (
+          <div className="detail-body">
+            <div className="samples">
+              <div className="content-tag">例句</div>
+              {word?.cet4_samples.map((item: any, index: number) => {
+                // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
+                const splitItems = item.replace(/[.?]/g, '\n').split('\n')
                 return (
-                  <div key={item}>
-                    <span>{item}</span>
-                    <i>|</i>
+                  <div key={item} className="samples-item">
+                    <p style={{ marginRight: '8px' }}>{index + 1}. </p>
+                    <div>
+                      {splitItems.map((splitItem: any, splitIndex: number) => (
+                        <p key={splitIndex}>
+                          {splitItem}
+                          {splitIndex === 0 ? '.' : null}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 )
               })}
             </div>
+            <div className="phrase">
+              <div className="content-tag">词组短语</div>
+              <div className="phrase-list">
+                {word?.cet4_phrase.map((item: any) => {
+                  return (
+                    <div key={item}>
+                      <span>{item}</span>
+                      <i>|</i>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+            <div className="distortion">
+              <div className="content-tag">派生词</div>
+              {word?.cet4_distortion}
+            </div>
           </div>
-          <div className="distortion">
-            <div className="content-tag">派生词</div>
-            {word?.cet4_distortion}
-          </div>
-        </div>
+        )}
         <RightOutlined
           onClick={() => setWordState(params.id === 'know' ? true : false)}
           className="RightOutlined"
