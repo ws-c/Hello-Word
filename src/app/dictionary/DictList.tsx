@@ -2,7 +2,8 @@
 import Link from 'next/link'
 import './DictList.css'
 export default async function DictList() {
-  const res = await fetch('http://localhost:3000/apis/dictionary')
+  // const res = await fetch('http://localhost:3000/apis/dictionary')
+  const res = await fetch('https://hello-word-lime.vercel.app/apis/dictionary')
   const { data } = await res.json()
 
   return (

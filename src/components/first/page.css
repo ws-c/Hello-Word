@@ -90,20 +90,28 @@
   background-color: #52c41a;
 }
 .Statistic-container {
-  position: absolute;
-  top: 2%;
-  left: 2%;
   display: flex;
-  gap: 20px;
+  position: relative;
+  top: -12px;
+  gap: 4px;
+  margin-right: 8px;
+}
+.Statistic-container .finished {
+  position: relative;
+  top: 2px;
+  display: flex;
+  align-items: center;
 }
 .ant-statistic-title {
   color: var(--text-color) !important;
 }
 .ant-statistic-content-value-int {
+  font-size: 20px !important;
   color: var(--ant-statistic-content-value) !important;
 }
 .ant-statistic-content-suffix {
   color: var(--text-color) !important;
+  font-size: 20px !important;
 }
 .ant-input-number {
   border-radius: 32px !important;

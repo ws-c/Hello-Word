@@ -138,7 +138,16 @@ export default function First() {
           </div>
         </div>
         <div className="plan-container">
-          <h1>今日计划</h1>
+          <div className="plan-header">
+            <h1>今日计划</h1>
+            <div className="Statistic-container">
+              <div className="finished">已完成：</div>
+              <Statistic
+                value={countToday - 1}
+                suffix={`/ ${goal}`}
+              />
+            </div>
+          </div>
           <div className="plan-box">
             <div className="new-box">
               <div>新学词</div>
@@ -161,15 +170,6 @@ export default function First() {
           </div>
         </div>
       </div>
-      <div className="Statistic-container">
-        <Statistic
-          className="today-statistic"
-          title="今日完成"
-          value={countToday - 1}
-          suffix={`/ ${goal}`}
-        />
-      </div>
-      {/* <Word></Word> */}
     </>
   )
 }
