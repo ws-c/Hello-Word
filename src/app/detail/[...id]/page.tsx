@@ -84,37 +84,35 @@ export default function Detail({ params }: { params: { id: string } }) {
   const setWordState = useCallback(
     debounce(
       async (flag: boolean) => {
-        if (getLocalTodayIndex()! + 1 === getLocalGoal()) {
-          router.push('/')
-          setLocalIndex(getLocalIndex()! + getLocalTodayIndex()!)
-          setLocalTodayIndex(0)
-
-          // 获取卡片信息
-          const card = getCardNumber()
-
-          // 如果卡片信息不存在，则创建一个新的卡片
-          if (!card) {
-            const today = new Date()
-            const newCard = { cardNum: 1, date: today }
-            setCardNumber(newCard)
-          } else {
-            const today = new Date()
-            const parsedCardDate = new Date(card.date)
-
-            // 检查是否是同一天
-            if (!isSameDay(today, parsedCardDate)) {
-              const newCard = { cardNum: card.cardNum + 1, date: today }
-              setCardNumber(newCard)
-            }
-          }
-          notification.success({
-            message: '成功',
-            description: '您已完成目标，请继续加油！',
-            duration: 2,
-          })
-          return
-        }
         if (flag) {
+          if (getLocalTodayIndex()! + 1 === getLocalGoal()) {
+            router.push('/')
+            setLocalIndex(getLocalIndex()! + getLocalTodayIndex()!)
+            setLocalTodayIndex(0)
+
+            // 获取打卡信息
+            const card = getCardNumber()
+            if (!card) {
+              const today = new Date()
+              const newCard = { cardNum: 1, date: today }
+              setCardNumber(newCard)
+            } else {
+              const today = new Date()
+              const parsedCardDate = new Date(card.date)
+
+              // 检查是否是同一天
+              if (!isSameDay(today, parsedCardDate)) {
+                const newCard = { cardNum: card.cardNum + 1, date: today }
+                setCardNumber(newCard)
+              }
+            }
+            notification.success({
+              message: '成功',
+              description: '您已完成目标，请继续加油！',
+              duration: 2,
+            })
+            return
+          }
           router.push(`/word`)
           // 设置本地存储索引
           setLocalTodayIndex(getLocalTodayIndex()! + 1)
@@ -145,7 +143,7 @@ export default function Detail({ params }: { params: { id: string } }) {
       clearTimeout(timeoutId)
     }
   }, [onPlay])
-  useKeydown({ onPlay, word, setWordState, flag: params.id })
+  useKeydown({ onPlay, word, setWordState, flag: params.id[0] })
 
   return (
     <>
@@ -265,7 +263,7 @@ export default function Detail({ params }: { params: { id: string } }) {
           </div>
         )}
         <RightOutlined
-          onClick={() => setWordState(params.id === 'know' ? true : false)}
+          onClick={() => setWordState(params.id[0] === 'know' ? true : false)}
           className="RightOutlined"
         />
       </div>

@@ -20,7 +20,7 @@ export const getLocalTheme = () => {
     return localStorage.getItem('theme') || 'light'
   }
 }
-
+// 今日完成数量
 export const getLocalTodayIndex = () => {
   if (typeof window !== 'undefined') {
     return parseInt(localStorage.getItem('TodayIndex') || '1')
@@ -31,6 +31,7 @@ export const setLocalTodayIndex = (TodayIndex: number) => {
     localStorage.setItem('TodayIndex', '' + TodayIndex)
   }
 }
+// 今日完成目标数量
 export const getLocalGoal = () => {
   if (typeof window !== 'undefined') {
     return parseInt(localStorage.getItem('goal') || '20')
