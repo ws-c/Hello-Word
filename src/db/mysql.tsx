@@ -11,7 +11,7 @@ const mysql = require('mysql2/promise')
 const pool = mysql.createPool({
   host: 'docker.maxd.gq',
   user: 'root',
-  password: '111111',
+  password: '1do47jdi54*',
   database: 'cet_4',
   port: 21087,
 })
