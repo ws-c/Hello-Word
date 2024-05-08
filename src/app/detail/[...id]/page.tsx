@@ -20,13 +20,14 @@ import {
 } from '@/utils/localStorage'
 
 import Prompt from '@/components/prompt/page'
-import { useSettingStore, useUserStore } from '@/store/useStore'
+import { useSettingStore, useThemeStore, useUserStore } from '@/store/useStore'
 import { useTenWordStore } from '@/store/useStore'
-import { Skeleton, notification } from 'antd'
+import { ConfigProvider, Skeleton, notification, theme } from 'antd'
 import useGetFilterData from '@/hooks/useGetFilterData'
 import isSameDay from '@/utils/isSameDay'
 
 export default function Detail({ params }: { params: { id: string } }) {
+  const { Theme } = useThemeStore()
   const { USER_TOKEN } = useUserStore()
   const { tenWord, addTenWord, formatTenWord } = useTenWordStore()
   const { isMuted } = useSettingStore()
@@ -149,7 +150,12 @@ export default function Detail({ params }: { params: { id: string } }) {
     <>
       <div className="detail-container">
         {loading ? (
-          <>
+          <ConfigProvider
+            theme={{
+              algorithm:
+                Theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            }}
+          >
             <Skeleton
               active
               loading={loading}
@@ -157,7 +163,7 @@ export default function Detail({ params }: { params: { id: string } }) {
               paragraph={{ rows: 3, width: ['300px', '300px', '300px'] }}
               style={{ marginBottom: '60px' }}
             />
-          </>
+          </ConfigProvider>
         ) : (
           <div className="detail-head">
             <div
@@ -199,7 +205,12 @@ export default function Detail({ params }: { params: { id: string } }) {
           </div>
         )}
         {loading ? (
-          <>
+          <ConfigProvider
+            theme={{
+              algorithm:
+                Theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            }}
+          >
             <Skeleton
               active
               loading={loading}
@@ -220,7 +231,7 @@ export default function Detail({ params }: { params: { id: string } }) {
               title={{ width: '10%' }}
               paragraph={{ rows: 2, width: '600px' }}
             />
-          </>
+          </ConfigProvider>
         ) : (
           <div className="detail-body">
             <div className="samples">
