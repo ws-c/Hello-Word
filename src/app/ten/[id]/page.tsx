@@ -59,7 +59,7 @@ export default function Page({ params }: { params: { id: string } }) {
     async (flag: boolean) => {
       if (flag) {
         router.push(`/word`)
-        onPlay('1', nextWord?.cet4_word)
+        onPlay('1', nextWord?.word)
       }
     },
     500 // 设置延迟时间，以毫秒为单位
@@ -92,9 +92,9 @@ export default function Page({ params }: { params: { id: string } }) {
                 <List.Item.Meta
                   title={
                     <div className={style.tenTitle}>
-                      <span>{index + 1}.</span> <span>{item.cet4_word}</span>
+                      <span>{index + 1}.</span> <span>{item.word}</span>
                       <Image
-                        onClick={() => onPlay('1', item.cet4_word, index)}
+                        onClick={() => onPlay('1', item.word, index)}
                         src={icon}
                         alt="trumpet"
                         width={20}
@@ -114,7 +114,7 @@ export default function Page({ params }: { params: { id: string } }) {
                             : style.itemDescription
                         }
                       >
-                        {item.cet4_translate}
+                        {item.translate}
                       </p>
                       <div
                         onClick={() => handleShow(index)}

@@ -13,8 +13,8 @@ export async function GET(request: any) {
     // 执行 MySQL 查询
     const idNum = (parseInt(currentPage) - 1) * 8
     const [rows, fields] = await connection.query(
-      `SELECT id,cet4_word,cet4_translate from wine_cet4_word,user_starWord
-          where user_starWord.word_id = wine_cet4_word.id and user_id = ?
+      `SELECT id,word,translate from CET_4,user_starWord
+          where user_starWord.word_id = CET_4.id and user_id = ?
               limit ?,8`,
       [token, idNum]
     )

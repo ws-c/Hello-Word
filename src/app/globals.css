@@ -138,7 +138,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 880px;
-  width: 800px;
+  width: 750px;
   background-color: var(--background-color1);
   box-shadow: 0px 6px 16px -8px var(--contentBgShadow),
     0px 9px 28px 0px var(--contentBgShadow2),

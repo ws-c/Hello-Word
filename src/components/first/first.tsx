@@ -161,7 +161,7 @@ export default function First() {
             </div>
             <Link href={'/word'}>
               <div
-                onClick={() => onPlay('1', word?.cet4_word!)}
+                onClick={() => onPlay('1', word?.word!)}
                 className="new-box start-btn"
               >
                 开始学习

@@ -8,7 +8,7 @@ export async function GET(request: any) {
 
     // 执行 MySQL 查询
     const [rows, fields] = await connection.query(
-      `SELECT id, cet4_word FROM wine_cet4_word`
+      `SELECT id, word FROM CET_4`
     )
 
     // 释放连接回连接池

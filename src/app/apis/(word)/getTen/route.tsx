@@ -10,7 +10,7 @@ export async function GET(request: any) {
 
     // 执行 MySQL 查询
     const [rows, fields] =
-      await connection.query(`SELECT id,cet4_word,cet4_translate FROM wine_cet4_word WHERE id <= ${id} 
+      await connection.query(`SELECT id,word,translate FROM CET_4 WHERE id <= ${id} 
     ORDER BY id DESC LIMIT 10`)
 
     // 释放连接回连接池

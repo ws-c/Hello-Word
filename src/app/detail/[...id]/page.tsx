@@ -123,9 +123,9 @@ export default function Detail({ params }: { params: { id: string } }) {
             formatTenWord()
             return
           }
-          onPlay('1', nextWord?.cet4_word!)
+          onPlay('1', nextWord?.word!)
         } else {
-          onPlay('1', word?.cet4_word!)
+          onPlay('1', word?.word!)
           router.push(`/word`)
         }
       },
@@ -169,18 +169,18 @@ export default function Detail({ params }: { params: { id: string } }) {
             <div
               className={params.id === 'forget' ? 'forget-word word' : 'word'}
             >
-              {word?.cet4_word}
+              {word?.word}
             </div>
             <div className="soundmark">
-              <span>{word?.cet4_phonetic}</span>
+              <span>{word?.phonetic}</span>
               <Image
-                onClick={() => onPlay('1', word?.cet4_word!)}
+                onClick={() => onPlay('1', word?.word!)}
                 src={icon}
                 alt="trumpet"
                 className={isUKActive ? 'audio-active audio' : 'audio'}
               ></Image>
               <Image
-                onClick={() => onPlay('0', word?.cet4_word!)}
+                onClick={() => onPlay('0', word?.word!)}
                 src={icon}
                 alt="trumpet"
                 className={isUSActive ? 'audio-active audio' : 'audio'}
@@ -198,7 +198,7 @@ export default function Detail({ params }: { params: { id: string } }) {
               )}
             </div>
             <div className="translate">
-              {word?.cet4_translate.map((item: string, index: number) => {
+              {word?.translate.map((item: string, index: number) => {
                 return <p key={index}>{item}</p>
               })}
             </div>
@@ -236,7 +236,7 @@ export default function Detail({ params }: { params: { id: string } }) {
           <div className="detail-body">
             <div className="samples">
               <div className="content-tag">例句</div>
-              {word?.cet4_samples.map((item: any, index: number) => {
+              {word?.samples.map((item: any, index: number) => {
                 // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
                 const splitItems = item.replace(/[.?]/g, '\n').split('\n')
                 return (
@@ -257,7 +257,7 @@ export default function Detail({ params }: { params: { id: string } }) {
             <div className="phrase">
               <div className="content-tag">词组短语</div>
               <div className="phrase-list">
-                {word?.cet4_phrase.map((item: any) => {
+                {word?.phrase.map((item: any) => {
                   return (
                     <div key={item}>
                       <span>{item}</span>
@@ -269,7 +269,7 @@ export default function Detail({ params }: { params: { id: string } }) {
             </div>
             <div className="distortion">
               <div className="content-tag">派生词</div>
-              {word?.cet4_distortion}
+              {word?.distortion}
             </div>
           </div>
         )}

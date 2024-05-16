@@ -36,7 +36,7 @@ const WordCard: React.FC<WordDetailProps> = ({ word }) => {
       <div className="tab-content">
         {activeTab === 1 && (
           <div className="samples">
-            {word?.cet4_samples.map((item: any, index: number) => {
+            {word?.p((item: any, index: number) => {
               const splitItems = item.replace(/[.?]/g, '\n').split('\n')
               return (
                 <div key={item} className="samples-item">
@@ -57,7 +57,7 @@ const WordCard: React.FC<WordDetailProps> = ({ word }) => {
         {activeTab === 2 && (
           <div className="phrase">
             <div className="phrase-list">
-              {word?.cet4_phrase.map((item: any) => (
+              {word?.phrase.map((item: any) => (
                 <div key={item}>
                   <span>{item}</span>
                   <i>|</i>
@@ -67,7 +67,7 @@ const WordCard: React.FC<WordDetailProps> = ({ word }) => {
           </div>
         )}
         {activeTab === 3 && (
-          <div className="distortion"> {word?.cet4_distortion}</div>
+          <div className="distortion"> {word?.distortion}</div>
         )}
       </div>
     </div>

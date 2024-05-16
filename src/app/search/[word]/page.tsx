@@ -62,12 +62,12 @@ export default function Page({ params }: { params: { word: string } }) {
     const getWord = async () => {
       try {
         const data = await fetchData(params.word)
-        const sampleList = removeEveryElement(data.cet4_samples.split('\n'))
-        const phraseList = data.cet4_phrase.split('\n')
-        const translateList = data.cet4_translate.split('\n')
-        data.cet4_samples = mergeEveryNumber(sampleList, 2, false)
-        data.cet4_phrase = mergeEveryNumber(phraseList, 2, false)
-        data.cet4_translate = translateList
+        const sampleList = removeEveryElement(data.samples.split('\n'))
+        const phraseList = data.phrase.split('\n')
+        const translateList = data.translate.split('\n')
+        data.samples = mergeEveryNumber(sampleList, 2, false)
+        data.phrase = mergeEveryNumber(phraseList, 2, false)
+        data.translate = translateList
         setWord(data)
         setIndex(data.id)
         isExist(data.id)
@@ -94,17 +94,17 @@ export default function Page({ params }: { params: { word: string } }) {
         {!isError && (
           <>
             <div className="detail-head">
-              <div className="word">{word?.cet4_word}</div>
+              <div className="word">{word?.word}</div>
               <div className="soundmark">
-                <span>{word?.cet4_phonetic}</span>
+                <span>{word?.phonetic}</span>
                 <Image
-                  onClick={() => onPlay('1', word?.cet4_word!)}
+                  onClick={() => onPlay('1', word?.word!)}
                   src={icon}
                   alt="trumpet"
                   className={isUKActive ? 'audio-active audio' : 'audio'}
                 ></Image>
                 <Image
-                  onClick={() => onPlay('0', word?.cet4_word!)}
+                  onClick={() => onPlay('0', word?.word!)}
                   src={icon}
                   alt="trumpet"
                   className={isUSActive ? 'audio-active audio' : 'audio'}
@@ -122,7 +122,7 @@ export default function Page({ params }: { params: { word: string } }) {
                 )}
               </div>
               <div className="translate">
-                {word?.cet4_translate.map((item: string, index: number) => {
+                {word?.translate.map((item: string, index: number) => {
                   return <p key={index}>{item}</p>
                 })}
               </div>
@@ -130,7 +130,7 @@ export default function Page({ params }: { params: { word: string } }) {
             <div className="detail-body">
               <div className="samples">
                 <div className="content-tag">例句</div>
-                {word?.cet4_samples.map((item: any, index: number) => {
+                {word?.samples.map((item: any, index: number) => {
                   // 在遇到 '.' 和 '?' 符号时添加换行符，并分割句子
                   const splitItems = item.replace(/[.?]/g, '\n').split('\n')
                   return (
@@ -154,7 +154,7 @@ export default function Page({ params }: { params: { word: string } }) {
               <div className="phrase">
                 <div className="content-tag">词组短语</div>
                 <div className="phrase-list">
-                  {word?.cet4_phrase.map((item: any) => {
+                  {word?.phrase.map((item: any) => {
                     return (
                       <div key={item}>
                         <span>{item}</span>
@@ -166,7 +166,7 @@ export default function Page({ params }: { params: { word: string } }) {
               </div>
               <div className="distortion">
                 <div className="content-tag">派生词</div>
-                {word?.cet4_distortion}
+                {word?.distortion}
               </div>
             </div>
           </>

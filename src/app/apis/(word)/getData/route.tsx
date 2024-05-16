@@ -11,13 +11,26 @@ export async function GET(request: any) {
 
     // 执行 MySQL 查询
     const [rows, fields] = await connection.query(
-      `SELECT * FROM wine_cet4_word where id = ${id}`
+      `SELECT * FROM word where id = ${id}`
     )
 
     // 释放连接回连接池
     connection.release()
+    const row = rows[0];
     revalidatePath('/word')
-    return NextResponse.json({ data: rows }, { status: 200 })
+    return NextResponse.json(
+      {
+        id: row.id,
+        word: row.word,
+        phonetic: row.phonetic,
+        translate: JSON.parse(row.translate),
+        distortion: JSON.parse(row.distortion),
+        phrase: JSON.parse(row.phrase),
+        samples: JSON.parse(row.samples),
+        bookName: row.bookName,
+      },
+      { status: 200 }
+    )
   } catch (error) {
     console.error('Error:', error)
     return NextResponse.json(

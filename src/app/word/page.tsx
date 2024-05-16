@@ -58,7 +58,7 @@ export default function Word() {
   const setWordState = useCallback(
     debounce(
       (flag: boolean) => {
-        onPlay('1', word?.cet4_word!)
+        onPlay('1', word?.word!)
         if (flag) {
           router.push(`/detail/know`)
           setIsKnowActive(true)
@@ -96,19 +96,19 @@ export default function Word() {
             <Spin size="large" style={{ marginBottom: '40px' }} />
           ) : (
             <>
-              <span>{word?.cet4_word}</span>
-              <div>{word?.cet4_phonetic}</div>
+              <span>{word?.word}</span>
+              <div>{word?.phonetic}</div>
             </>
           )}
           <div className="icon-container">
             <Image
-              onClick={() => onPlay('1', word?.cet4_word!)}
+              onClick={() => onPlay('1', word?.word!)}
               src={icon}
               alt="trumpet"
               className={isUKActive ? 'audio-active audio' : 'audio'}
             ></Image>
             <Image
-              onClick={() => onPlay('0', word?.cet4_word!)}
+              onClick={() => onPlay('0', word?.word!)}
               src={icon}
               alt="trumpet"
               className={isUSActive ? 'audio-active audio' : 'audio'}

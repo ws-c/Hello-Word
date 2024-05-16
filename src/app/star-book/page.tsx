@@ -108,9 +108,9 @@ export default function StarBook() {
               <List.Item.Meta
                 title={
                   <div className="star-book-title">
-                    <span>{index + 1}.</span> <span>{item.cet4_word}</span>
+                    <span>{index + 1}.</span> <span>{item.word}</span>
                     <Image
-                      onClick={() => onPlay('1', item.cet4_word, index)}
+                      onClick={() => onPlay('1', item.word, index)}
                       src={icon}
                       alt="trumpet"
                       width={20}
@@ -122,7 +122,7 @@ export default function StarBook() {
                   </div>
                 }
                 description={
-                  <p className="star-book-description">{item.cet4_translate}</p>
+                  <p className="star-book-description">{item.translate}</p>
                 }
               />
             </List.Item>

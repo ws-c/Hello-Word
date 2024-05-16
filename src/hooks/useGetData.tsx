@@ -10,8 +10,10 @@ export default function useGetData(id: number) {
       try {
         const response = await fetch(`/apis/getData?id=${id}`)
         const res = await response.json()
-        const data = res.data[0]
-        setWord(data)
+        // const data = res.data[0]
+        setWord(res)
+        console.log(res);
+        
       } catch (error) {
         console.error('Error fetching data:', error)
       } finally {

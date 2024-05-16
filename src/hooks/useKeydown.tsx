@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import debounce from '../utils/debounce'
 type tsProp = {
   onPlay?: (type: string, word: string) => void
-  word?: { cet4_word: string } | undefined
+  word?: { word: string } | undefined
   setWordState?: (flag: boolean) => void
   banKeydown?: string
   flag?: string
@@ -19,11 +19,11 @@ export default function useKeydown({
       if (onPlay) {
         if (event.key === 'z') {
           // 在按下 Z 键时触发
-          onPlay('1', word?.cet4_word!)
+          onPlay('1', word?.word!)
         }
         if (event.key === 'x') {
           // 在按下 x 键时触发
-          onPlay('2', word?.cet4_word!)
+          onPlay('2', word?.word!)
         }
       }
       if (setWordState) {
@@ -49,5 +49,5 @@ export default function useKeydown({
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [banKeydown, flag, onPlay, setWordState, word?.cet4_word])
+  }, [banKeydown, flag, onPlay, setWordState, word?.word])
 }

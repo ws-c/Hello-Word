@@ -8,7 +8,7 @@ import { FixedSizeList as List, ListChildComponentProps } from 'react-window'
 
 interface WordItem {
   id: number
-  cet4_word: string
+  word: string
 }
 export default function DictList() {
   const [loading, setLoading] = useState(true)
@@ -38,11 +38,11 @@ export default function DictList() {
     }
 
     return (
-      <Link href={`/search/${item.cet4_word}`} key={item.id}>
+      <Link href={`/search/${item.word}`} key={item.id}>
         <li className="DictList-item-container" style={style}>
           <div>
             <span className="word-id">{item.id}.</span>
-            <span className="word">{item.cet4_word}</span>
+            <span className="word">{item.word}</span>
           </div>
           <div className="right">&gt;</div>
         </li>

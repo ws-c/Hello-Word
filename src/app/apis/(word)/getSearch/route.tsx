@@ -10,7 +10,7 @@ export async function GET(request: any) {
 
     // 执行 MySQL 查询
     const [rows, fields] = await connection.query(
-      `SELECT * FROM wine_cet4_word WHERE cet4_word = LOWER('${word}')`
+      `SELECT * FROM CET_4 WHERE word = LOWER('${word}')`
     )
 
     // 释放连接回连接池
