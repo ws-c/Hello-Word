@@ -124,7 +124,7 @@
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  right: 10vw;
+  right: 15vw;
   font-size: 80px;
 }
 .RightOutlined:hover {
