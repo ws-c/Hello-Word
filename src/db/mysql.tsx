@@ -1,18 +1,11 @@
 const mysql = require('mysql2/promise')
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'cet_4',
+  host: 'rm-wz910td2iz8v3hmjyho.mysql.rds.aliyuncs.com',
+  user: 'wangshuai',
+  password: 'Ws-118816742',
+  database: 'cet4',
   port: 3306,
 })
 
-// const pool = mysql.createPool({
-//   host: 'docker.maxd.gq',
-//   user: 'root',
-//   password: '1do47jdi54*',
-//   database: 'cet_4',
-//   port: 21087,
-// })
 export default pool
